@@ -37,34 +37,26 @@ const Cart = props =>{
 
 
   const [itemDelete, setItemDelete] = useState(0);
-  const [itemMinus, setItemMinus] = useState(0);
-  const [itemPlus, setItemPlus] = useState(0);
   
   useEffect(() => {
-    setData(data.filter((data) => data.id != itemDelete));
+    setData((cartItems) => cartItems.filter((data) => data.id !== itemDelete));
   }, [itemDelete]);
 
- 
-  useEffect(() => {
-    if(itemMinus>0){
-    var newData = [ ...data ];
-    newData[itemMinus-1].itemInCart--;
-    setData(newData);
-    setItemMinus(0);
-    }
-  }, [itemMinus]);
 
-  useEffect(() => {
-    if(itemPlus>0){
-    var newData = [ ...data];
-    newData[itemPlus-1].itemInCart++;
-    setData(newData);
-    setItemPlus(0);
-    }
-  }, [itemPlus]);
+  const alterItemQty = (id, isIncrease) => {
+    setData((cartItems) => {
+      const update = cartItems.map((item) => {
+        console.log(item);
+        if (item.id === id && isIncrease) item.itemInCart++;
+        if (item.id === id && !isIncrease) item.itemInCart--;
+        return item;
+      });
+      return update;
+    });
+  };
 
-  const tray = data.map((data) =>
-    <CartItemTray delete={setItemDelete} minus={setItemMinus} plus={setItemPlus} data={data} setData={setData}/>
+  const tray = data.map((data, index) =>
+    <CartItemTray key={index} delete={setItemDelete} alterQty={alterItemQty} data={data} setData={setData}/>
   );
 
   return(

@@ -5,7 +5,7 @@ const CloseBtn = props =>{
     props.setLogin(!props.login);
   }
   return(
-    <button className="loginCloseBtn" onClick ={modal}><img className = 'loginCloseImg' src={icon}/></button>
+    <button className="loginCloseBtn" onClick ={modal}><img className = 'loginCloseImg' alt='cross' src={icon}/></button>
   );
 }
 

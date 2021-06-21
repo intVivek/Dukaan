@@ -5,7 +5,7 @@ const CartBtn = props =>{
     props.setCart(!props.cart);
   }
   return(
-    <button className="cartBtn" onClick={cart}><img className = 'cartImg' src={icon}/><span> Cart</span></button>
+    <button className="cartBtn" onClick={cart}><img className = 'cartImg' alt='cart' src={icon}/><span> Cart</span></button>
   );                               
 }
 
