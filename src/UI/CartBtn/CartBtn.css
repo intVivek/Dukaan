@@ -1,0 +1,14 @@
+.cartImg{
+  width : 20px;
+  height : 20px;
+  background-color: transparent;
+  filter: invert(100%);
+}
+.cartBtn{
+  color : white;
+  background-color: transparent;
+  border : 0px solid;
+  font-size : 18px;
+  cursor: pointer;
+}
+

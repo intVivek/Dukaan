@@ -1,0 +1,10 @@
+.loginBtn{
+  color : #2874f0;
+  width : 130px;
+  height : 30px;
+  font-size : 15px;
+  font-weight : bold;
+  border : none;
+  background-color : white;
+  cursor: pointer;
+}

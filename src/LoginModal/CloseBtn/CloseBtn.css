@@ -1,0 +1,12 @@
+.loginCloseImg{
+  width : 30px;
+  height : 30px;
+  filter: invert(100%);
+}
+.loginCloseBtn{
+  width : 35px;
+  height : 35px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
-
+import Header from './UI/Header/Header.js'
+import LoginPage from './LoginModal/LoginPage.js';
+import Cart from './Cart/Cart.js';
 function App() {
+  const isAuth = false;
+  const [login, setLogin] = useState(false);
+  const [cart, setCart] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div  className="App">
+      { login ? <LoginPage login={login} setLogin={setLogin} />:""}
+      <>
+        <Header 
+          isAuth ={isAuth}
+          login={login}
+          setLogin={setLogin}
+          cart={cart}
+          setCart={setCart}
+        />
+        {cart?<Cart/>:""}
+      </>
+      
     </div>
   );
 }
