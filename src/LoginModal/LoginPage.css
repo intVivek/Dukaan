@@ -6,6 +6,7 @@
   display : flex;
   align-items : center;
   justify-content : center;
+  z-index: 1;
 }
 
 .loginWindow{
@@ -60,6 +61,7 @@
   font-size : 16px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
   border-radius: 2px;
+  cursor: pointer;
 }
 .loginModalReqOTPBtn{
   width : 80%;
@@ -71,13 +73,29 @@
   box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 20%);
   border-radius: 2px;
   align-items: flex-start;
+  cursor: pointer;
 }
 #loginInputSection6{
   width : 100%;
-  flex-grow : 0;
+  flex-grow : 1;
   justify-content : center;
   align-items: center;
 }
 #loginInputSection7{
   align-items: flex-start;
+}
+
+#loginInputSection9{
+  display : flex;
+  justify-content : center;
+  align-items: center;
+}
+
+#loginInputSection9>button{
+  border : none ;
+  background-color: #fff;
+  color: #2874f0;
+  font-weight: 500;
+  cursor: pointer;
+  height : 40px;
 }

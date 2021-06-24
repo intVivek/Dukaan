@@ -37,5 +37,5 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedInputs(props) {
   const classes = useStyles();
 
-  return <CssTextField  className={classes.margin} label={props.placeHolder} />;
+  return <CssTextField onChange={(event) => props.setValue(event.target.value)} className={classes.margin} label={props.placeHolder} />;
 }
