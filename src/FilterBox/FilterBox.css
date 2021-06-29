@@ -1,0 +1,101 @@
+.filterBox{
+  position : fixed;
+  width : 280px;
+  height : 500px;
+  background-color : #fff;
+  left : 10px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
+}
+.filterBoxName{
+  width : 100%;
+  height : 50px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+.filterBoxName>span{
+  font-size : 18px;
+  font-weight: 500;
+  margin-left : 15px;
+}
+.filterBoxPrice{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width : 100%;
+  height : 80px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filterBoxPrice>span{
+  font-size : 15px;
+  font-weight: 500;
+  margin-left : 15px;
+}
+
+.filterBoxPriceText{
+  width : 100%;
+  height : 30px;
+  display: flex;
+}
+.filterBoxPriceText>input{
+  width : 60px;
+  height : 20px;
+  margin-left : 15px;
+}
+.filterBoxPriceText>input:focus{
+  border: 1px solid #313131;
+  outline-offset: 0px;
+  outline: none;
+}
+
+.filterBoxPriceText>button{
+  width : 35px;
+  height : 25px;
+  margin-left : 15px;
+}
+.filterBoxAssure{
+  width : 100%;
+  height : 45px;
+  display:flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+.filterBoxAssure>input{
+  margin-left : 15px;
+}
+.filterBoxAssure>span{
+  margin-left : 5px;
+}
+.filterBoxAssure>img{
+  width : 20px;
+  height: 20px;
+  margin-left : 7px;
+}
+
+.filterBoxRating{
+  width : 100%;
+  height: 130px;
+  border-bottom: 1px solid #f0f0f0;
+  display : flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.filterBoxRating>span{
+  font-size : 15px;
+  font-weight: 500;
+  margin-left : 15px;
+  margin-bottom: 10px;
+}
+.filterBoxRating>div{
+  display : flex;
+  margin-left : 15px;
+  align-items: center;
+}
+.filterBoxRating>div>input{
+  margin-top: 10px;
+}
+.filterBoxRating>div>span{
+  margin-left : 10px;
+  margin-top: 5px;
+}

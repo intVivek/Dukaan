@@ -5,6 +5,8 @@
   align-items: center;
   flex-direction: column-reverse;
   background-color: #f1f3f6;
+  z-index: 1;
+  padding-top:56px;
 }
 .cartWindow{
   width: 80%;

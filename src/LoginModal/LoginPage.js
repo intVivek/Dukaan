@@ -1,4 +1,4 @@
-import {useState ,useEffect} from 'react';
+import {useState } from 'react';
 import './LoginPage.css';
 import CloseBtn from './CloseBtn/CloseBtn.js';
 import TextField from './TextField/TextField.js';
@@ -19,8 +19,6 @@ const LoginPage = props =>{
 
   const authenticate =()=>{
     
-    
-    console.log(data);
     if(email===''){
       notification("Email cannot be empty",'error');
     }
@@ -48,6 +46,8 @@ const LoginPage = props =>{
                       props.setAuth(true);
                       props.setLogin(!props.login);
                       props.setUserData(data[1]);
+                      props.setCookie('email', email, { path: '/' });
+                      props.setCookie('password', password, { path: '/' });
               }
               else{
                 notification(data[0].message,'error');
