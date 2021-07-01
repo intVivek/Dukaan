@@ -1,25 +1,31 @@
 import {useState,useEffect} from 'react';
 import './App.css';
-import Header from './UI/Header/Header.js'
-import LoginPage from './LoginModal/LoginPage.js';
-import Cart from './Cart/Cart.js';
+import Header from './components/Header/Header.js'
+import LoginPage from './components/LoginModal/LoginPage.js';
+import Cart from './pages/Cart/Cart.js';
 import { useCookies } from 'react-cookie';
-import Body from './Body/Body.js';
+import Body from './pages/Body/Body.js';
+import ProductPage from './components/ProductPage/ProductPage.js';
+import { Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
   const [auth,setAuth]=useState(false);
   const [login, setLogin] = useState(false);
-  const [cart, setCart] = useState(false);
   const [userData,setUserData] = useState({});
   const [cookies, setCookie] = useCookies(['user']);
   const [productData,setProductData] = useState([]);
   const [page,setPage]=useState(1);
-  const [search,setSearch]=useState('');
+  const [search,setSearch]=useState('tea');
   const [count,setCount]=useState(0);
+  const [brand,setBrand]=useState([]);
   const [sort,setSort]=useState('popularity');
   const [filterPrice,setFilterPrice]=useState('');
   const [isAssured,setIsAssured]=useState(false);
   const [filterRating,setFilterRating]=useState('');
+  const [filterBrand,setFilterBrand] =useState({});
+  const [openProduct,setOpenProduct] =useState(0);
+
+  useEffect(()=>{console.log('User Data', userData)});
 
 useEffect(()=>{
   var email = cookies.email,
@@ -42,7 +48,7 @@ useEffect(()=>{
         console.log(data);
               if(data[0].status===0){
                       setAuth(true);
-                      setUserData(data[0]);     
+                      setUserData(data[1]);     
               }
       })
     }
@@ -56,7 +62,8 @@ useEffect(()=>{
       sort,
       filterPrice,
       isAssured,
-      filterRating
+      filterRating,
+      filterBrand
   }
       fetch(url, {
               method: "post",
@@ -68,31 +75,75 @@ useEffect(()=>{
         
         setProductData(data[0]);
         setCount(data[1].count);
+        setBrand(data[2]);
         console.log(data[1]);
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
         })
       })
-},[page,search,sort,filterPrice,isAssured,filterRating]);
+},[page,search,sort,filterPrice,isAssured,filterRating,filterBrand]);
+
+
+useEffect(()=>{
+    setPage(1);
+  },[search,sort,filterPrice,isAssured,filterRating,filterBrand]);
 
   useEffect(()=>{
-    setPage(1);
-  },[search,sort,filterPrice,isAssured,filterRating]);
+    setFilterBrand({});
+  },[search]);
+
 
   return (
     <div  className="App">
-      {login ? <LoginPage setCookie={setCookie} setUserData={setUserData} auth={auth} setAuth={setAuth} login={login} setLogin={setLogin} />:""}
-        <Header 
-          userData={userData}
-          auth ={auth}
-          login={login}
-          setLogin={setLogin}
-          cart={cart}
-          setCart={setCart}
-          setSearch={setSearch}
+      <Header 
+        userData={userData}
+        auth ={auth}
+        login={login}
+        setLogin={setLogin}
+        setSearch={setSearch}
+      />      
+      {login?<LoginPage 
+              setCookie={setCookie} 
+              setUserData={setUserData} 
+              auth={auth} 
+              setAuth={setAuth} 
+              login={login} 
+              setLogin={setLogin} 
+            />:""
+      }
+     
+      <Switch>
+      <ProductPage/>
+        <Route
+          exact path ="/"
+          render={()=>
+            <Body 
+              filterBrand={filterBrand} 
+              setFilterBrand={setFilterBrand} 
+              brand={brand}
+              setFilterRating={setFilterRating} 
+              isAssured={isAssured} 
+              setIsAssured={setIsAssured} 
+              setFilterPrice={setFilterPrice} 
+              setSort={setSort} 
+              search={search} 
+              count={count} 
+              page={page} 
+              setPage={setPage} 
+              productData={productData}
+              setProductData={setProductData}
+            />
+          }
         />
-        {cart&&!login?<Cart/>:<Body setFilterRating={setFilterRating} isAssured={isAssured} setIsAssured={setIsAssured} setFilterPrice={setFilterPrice} setSort={setSort} search={search} count={count} page={page} setPage={setPage} productData={productData} setProductData={setProductData}/>}
+        <Route
+          exact path ="/cart"
+          render={()=>
+            <Cart/>
+          }
+        />
+        <Route exact path ="/*" render={()=> <Redirect path='/'/> } />
+      </Switch>
     </div>
   );
 }

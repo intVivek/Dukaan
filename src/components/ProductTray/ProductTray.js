@@ -16,7 +16,7 @@ const ProductTray = props=>{
         <div className="ProductTrayImage"><img src={img[0]} alt='Product'/></div>
         <div className="ProductTraySpecList">
           <div className ="productName"><span>{props.data.product_name}</span></div>
-          <div className ="productRating">★{props.data.product_rating}</div>
+          <div className ="productRating">{props.data.product_rating}★</div>
           <ul>
             {spec[0]&&spec[0].length<50?<li>{spec[0]}</li>:''}
             {spec[1]&&spec[1].length<50?<li>{spec[1]}</li>:''}

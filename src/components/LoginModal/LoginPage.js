@@ -1,11 +1,11 @@
 import {useState } from 'react';
 import './LoginPage.css';
-import CloseBtn from './CloseBtn/CloseBtn.js';
-import TextField from './TextField/TextField.js';
+import CloseBtn from '../../components/CloseBtn/CloseBtn.js';
+import TextField from '../../components/TextField/TextField.js';
 import Noty from 'noty';  
 import validator from 'validator';
-import "../../node_modules/noty/lib/noty.css";  
-import "../../node_modules/noty/lib/themes/nest.css";
+import "../../../node_modules/noty/lib/noty.css";  
+import "../../../node_modules/noty/lib/themes/nest.css";
 
 
 const LoginPage = props =>{

@@ -2,8 +2,8 @@
   width : 100%;
   height : 40px;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
-  margin-bottom: 10px;
   background-color : #fff;
+  z-index: 1;
 }
 
 .MainBody{
@@ -16,6 +16,9 @@
   flex-direction: column;
   padding-top:56px;
   scroll-behavior: smooth;
+}
+.MainBody::-webkit-scrollbar {
+  display: none;
 }
 .BodyDisplay{
   display: flex;

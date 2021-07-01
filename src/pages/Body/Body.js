@@ -1,13 +1,13 @@
 import './Body.css';
 import {useState,useEffect} from 'react';
-import ProductTray from '../ProductTray/ProductTray.js';
-import FilterBox from '../FilterBox/FilterBox.js';
+import ProductTray from '../../components/ProductTray/ProductTray.js';
+import FilterBox from '../../components/FilterBox/FilterBox.js';
 
 const Body = props =>{
   const [activeSort, setActiveSort]=useState('popularity');
 
   const tray = props.productData.map((data, index) =>
-      <ProductTray key={index} data={data}></ProductTray>
+      <ProductTray onClick={()=>{props.setOpenProduct(data.id)}} key={index} data={data}></ProductTray>
   ),
   getClassName = (sort) => {
     return sort === activeSort ? 'active' : '';
@@ -23,7 +23,7 @@ const Body = props =>{
       <div className="bodyHeader">hello</div>
       <div className="BodyDisplay">
         <div className="BodyDisplayGap"></div>
-        <FilterBox setFilterRating={props.setFilterRating} isAssured={props.isAssured} setIsAssured={props.setIsAssured} setFilterPrice={props.setFilterPrice}/>
+        <FilterBox filterBrand={props.filterBrand} setFilterBrand={props.setFilterBrand} brand={props.brand} setFilterRating={props.setFilterRating} isAssured={props.isAssured} setIsAssured={props.setIsAssured} setFilterPrice={props.setFilterPrice}/>
         <div className="itemBox">
           <div className='productSort'>
           <div className='productSortTop'><span>{props.search?props.search:"All Products"}</span><p>({s})</p></div>

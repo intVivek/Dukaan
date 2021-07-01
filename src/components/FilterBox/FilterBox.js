@@ -8,15 +8,19 @@ const FilterBox = props =>{
   const [threeStar,setThreeStar]=useState(false);
   const [twoStar,setTwoStar]=useState(false);
   const minHandler=(e)=>{
-    const value = e.target.value.replace(/\D/g, "");
-    setMin(value);
+    if(!isNaN(e.target.value)){
+      setMin(parseInt(e.target.value));
+    }
   }
   const maxHandler=(e)=>{
-    const value = e.target.value.replace(/\D/g, "");
-    setMax(value);
+    if(!isNaN(e.target.value)){
+      setMax(parseInt(e.target.value));
+    }
   }
-  const filterPrice=()=>{
-    if(min&&max&&max>min){
+  const filterPriceHandler=()=>{
+    console.log(min, max);
+    if(parseInt(max)>parseInt(min)){
+      console.log('helloprice');
       props.setFilterPrice('AND discounted_price BETWEEN '+min+' AND '+max);
     }
     setMin('');
@@ -37,6 +41,25 @@ const FilterBox = props =>{
     setThreeStar(false);  
     setTwoStar(!twoStar);  
   }
+  const filterBrandHandler=(brand)=>{
+    console.log('hello',brand);
+      if(brand in props.filterBrand){
+        props.setFilterBrand((filterBrand) => {
+          delete filterBrand[brand];
+          return {...filterBrand};
+        });
+      }
+      else{
+        props.setFilterBrand((filterBrand) => {
+          const newBrand = {};
+          newBrand[brand] = brand;
+          return {...filterBrand, ...newBrand};
+        });
+      }
+  }
+  const tray = props.brand.map((data, index) =>
+    <div><input type="checkbox" defaultChecked={false} onChange={()=>filterBrandHandler(data.brand)}></input><span>{data.brand}</span></div>
+  );
   useEffect(()=>{
     if(!fourStar&&!threeStar&&!twoStar){
       props.setFilterRating('');
@@ -59,7 +82,7 @@ const FilterBox = props =>{
             <div className ="filterBoxPriceText">
               <input value={min} onChange={minHandler} placeholder="Min"/>
               <input value={max} onChange={maxHandler} placeholder="Max"/>
-              <button onClick={filterPrice}>GO</button>
+              <button onClick={filterPriceHandler}>GO</button>
             </div>
           </div>
           <div className="filterBoxAssure">
@@ -72,6 +95,10 @@ const FilterBox = props =>{
             <div><input type="checkbox" checked={fourStar} onClick={fourRating}></input><span>4★ & above</span></div>
             <div><input type="checkbox" checked={threeStar} onClick={threeRating}></input><span>3★ & above</span></div>
             <div><input type="checkbox" checked={twoStar} onClick={twoRating}></input><span>2★ & above</span></div>
+          </div>
+          <div className="filterBoxBrandName"><span>Select Brands</span></div>
+          <div className="filterBoxBrand">
+            {tray}
           </div>
         </div>
   );
