@@ -15,7 +15,7 @@ function App() {
   const [cookies, setCookie] = useCookies(['user']);
   const [productData,setProductData] = useState([]);
   const [page,setPage]=useState(1);
-  const [search,setSearch]=useState('tea');
+  const [search,setSearch]=useState('');
   const [count,setCount]=useState(0);
   const [brand,setBrand]=useState([]);
   const [sort,setSort]=useState('popularity');
@@ -25,7 +25,6 @@ function App() {
   const [filterBrand,setFilterBrand] =useState({});
   const [openProduct,setOpenProduct] =useState(0);
 
-  useEffect(()=>{console.log('User Data', userData)});
 
 useEffect(()=>{
   var email = cookies.email,
@@ -45,7 +44,6 @@ useEffect(()=>{
       }).then(function (response) {
               return response.json(data);
       }).then(function (data) {
-        console.log(data);
               if(data[0].status===0){
                       setAuth(true);
                       setUserData(data[1]);     
@@ -76,7 +74,6 @@ useEffect(()=>{
         setProductData(data[0]);
         setCount(data[1].count);
         setBrand(data[2]);
-        console.log(data[1]);
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
@@ -114,7 +111,18 @@ useEffect(()=>{
       }
      
       <Switch>
-      <ProductPage/>
+      
+      <Route
+          exact path ="/product"
+          render={()=>
+            <ProductPage
+              auth={auth}
+              login={login}
+              setLogin={setLogin}
+              userData={userData}
+            />
+          }
+        />
         <Route
           exact path ="/"
           render={()=>
@@ -139,7 +147,7 @@ useEffect(()=>{
         <Route
           exact path ="/cart"
           render={()=>
-            <Cart/>
+            <Cart userData={userData}/>
           }
         />
         <Route exact path ="/*" render={()=> <Redirect path='/'/> } />

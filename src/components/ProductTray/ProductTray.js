@@ -1,7 +1,8 @@
 import  './ProductTray.css';
 import icon from './assured.png';
-
+import { useHistory } from "react-router-dom";
 const ProductTray = props=>{
+  let history = useHistory();
  var img = props.data.image.split(',');
  var spec =props.data.product_specifications.replaceAll(':',' : ').split('|');
  spec = spec.filter((data) => data.includes(':')&&data.split(':')[0]&&data.split(':')[1]);
@@ -11,7 +12,7 @@ const ProductTray = props=>{
         discount=Math.floor(((rp-dp)*100/rp));
   
   return(
-    <div className="ProductTrayContainer">
+    <div onClick={()=>{window.scrollTo({top: 0});history.push("/product?id="+props.data.id);}} className="ProductTrayContainer">
       <div className="ProductTray">
         <div className="ProductTrayImage"><img src={img[0]} alt='Product'/></div>
         <div className="ProductTraySpecList">
@@ -26,8 +27,8 @@ const ProductTray = props=>{
           </ul>
         </div>
         <div className = "productTrayPrice">
-          <div><span>₹{dp}</span>{props.data.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
-          <div>{rp>dp?<><p>₹{rp}</p><h4>{discount}%OFF</h4></>:""}</div>  
+          <div><span>₹{dp.toLocaleString()}</span>{props.data.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
+          <div>{rp>dp?<><p>₹{rp.toLocaleString()}</p><h4>{discount}%OFF</h4></>:""}</div>  
         </div> 
       </div>
     </div>

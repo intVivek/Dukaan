@@ -5,9 +5,9 @@ import FilterBox from '../../components/FilterBox/FilterBox.js';
 
 const Body = props =>{
   const [activeSort, setActiveSort]=useState('popularity');
-
+  
   const tray = props.productData.map((data, index) =>
-      <ProductTray onClick={()=>{props.setOpenProduct(data.id)}} key={index} data={data}></ProductTray>
+      <ProductTray  key={index} data={data}></ProductTray>
   ),
   getClassName = (sort) => {
     return sort === activeSort ? 'active' : '';
