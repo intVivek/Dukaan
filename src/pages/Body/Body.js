@@ -2,10 +2,13 @@ import './Body.css';
 import {useState,useEffect} from 'react';
 import ProductTray from '../../components/ProductTray/ProductTray.js';
 import FilterBox from '../../components/FilterBox/FilterBox.js';
+import { useHistory,useLocation } from "react-router-dom";
 
 const Body = props =>{
+  var location = useLocation();
+  let history = useHistory();
+  const query = new URLSearchParams(location.search);
   const [activeSort, setActiveSort]=useState('popularity');
-  
   const tray = props.productData.map((data, index) =>
       <ProductTray  key={index} data={data}></ProductTray>
   ),
@@ -44,6 +47,7 @@ const Body = props =>{
         
       </div>
     </div>
-  );                               
+  ); 
+
 }
 export default Body;

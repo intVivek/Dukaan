@@ -5,7 +5,17 @@ const LoginBtn = props =>{
     props.setLogin(!props.login);
   }
     if(props.auth){
-      return <h4>{props.userData.email}</h4>
+      return (
+        <div class="dropdown">
+          <button class="dropbtn">{props.userData.name}</button>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">orders</a>
+            <a href="#">Wishlist</a>
+            <a href="#">Log Out</a>
+          </div>
+        </div>
+      );
     }
     else{
       return <button className='loginBtn' onClick={clickHandler}>

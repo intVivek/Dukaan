@@ -5,10 +5,12 @@ import LoginPage from './components/LoginModal/LoginPage.js';
 import Cart from './pages/Cart/Cart.js';
 import { useCookies } from 'react-cookie';
 import Body from './pages/Body/Body.js';
-import ProductPage from './components/ProductPage/ProductPage.js';
+import OrderedPage from './pages/OrderedPage/OrderedPage.js';
+import ProductPage from './pages/ProductPage/ProductPage.js';
 import { Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
+
   const [auth,setAuth]=useState(false);
   const [login, setLogin] = useState(false);
   const [userData,setUserData] = useState({});
@@ -23,8 +25,6 @@ function App() {
   const [isAssured,setIsAssured]=useState(false);
   const [filterRating,setFilterRating]=useState('');
   const [filterBrand,setFilterBrand] =useState({});
-  const [openProduct,setOpenProduct] =useState(0);
-
 
 useEffect(()=>{
   var email = cookies.email,
@@ -148,6 +148,12 @@ useEffect(()=>{
           exact path ="/cart"
           render={()=>
             <Cart userData={userData}/>
+          }
+        />
+        <Route
+          exact path ="/orders"
+          render={()=>
+            <OrderedPage userData={userData}/>
           }
         />
         <Route exact path ="/*" render={()=> <Redirect path='/'/> } />

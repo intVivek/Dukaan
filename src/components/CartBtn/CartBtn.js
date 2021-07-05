@@ -5,16 +5,11 @@ const CartBtn = props =>{
   let history = useHistory();
   const clickHandler =()=>{
     if(props.auth){
-      if(props.cart){
-        history.goBack();
-      }
-      else{
         window.scrollTo({
           top: 0
         })
         history.push("/cart");
-      }
-    }
+  }
     else
       props.setLogin(!props.login);
   }

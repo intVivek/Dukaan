@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import "./ProductPage.css";
-import cartIcon from '../CartBtn/CartIcon.svg'
+import cartIcon from '../../components/CartBtn/CartIcon.svg'
 import { useHistory,useLocation } from "react-router-dom";
 
 const ProductPage = props => {
@@ -14,7 +14,6 @@ const ProductPage = props => {
   const productId = query.get('id');
   console.log('clk',productId);
   const url = 'http://localhost:5000/openProduct';
-  var img;
   var data = {
     user_id: productId
   }
@@ -29,6 +28,7 @@ const ProductPage = props => {
       setProductData(data[0]);
     })
   }, []);
+  
   console.log(productData);
   var img = productData.image;
   var x = img && img.split(',');
@@ -51,10 +51,11 @@ const ProductPage = props => {
   const addToCartHandler=()=>{
     var data = {
       user_id: props.userData.id,
-      product_id:productData.id
+      product_id:productData.id,
+      table:'cart'
     }
     if(props.auth){
-      const url = 'http://localhost:5000/addToCart';
+      const url = 'http://localhost:5000/addTo';
       fetch(url, {
         method: "post",
         body: JSON.stringify(data),
@@ -72,9 +73,36 @@ const ProductPage = props => {
       props.setLogin(!props.login);
     }
   }
+
+  const buyNowHandler=()=>{
+    var data = {
+      user_id: props.userData.id,
+      product_id:productData.id,
+      price:productData.discounted_price,
+      quantity:1
+    }
+    if(props.auth){
+      const url = 'http://localhost:5000/buyNow';
+      fetch(url, {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: { "Content-type": "application/json" }
+      }).then(function (response) {
+        return response.json(data);
+      }).then(function (data) {
+        window.scrollTo({
+          top: 0
+        })
+        history.push("/orders");
+      })
+    }
+    else{
+      props.setLogin(!props.login);
+    }
+  }
+
   return (
     <div className="productPage">
-      <div className="bodyHeader">hello</div>
       <div className="productPageMain">
         <div className="productPageImageMain">
           <div className="productPageImageThumbnail">
@@ -86,7 +114,7 @@ const ProductPage = props => {
             </div>
             <div className="productPageBuyButtons">
               <button onClick={addToCartHandler} className="productAddToCartBtn"><img className='cartImg' src={cartIcon}/> ADD TO CART</button>
-              <button className="productbuyBtn"><div></div> &nbsp;BUY NOW</button>
+              <button onClick={buyNowHandler} className="productbuyBtn"><div></div> &nbsp;BUY NOW</button>
             </div>
           </div>
         </div>

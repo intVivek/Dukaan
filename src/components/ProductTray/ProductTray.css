@@ -58,9 +58,9 @@
   text-overflow: ellipsis;
   background-color: #fff;
   font-weight: 500;
-    font-size: 18px;
-    display: block;
-    cursor: pointer;
+  font-size: 18px;
+  display: block;
+  cursor: pointer;
 }
 
 .productRating{

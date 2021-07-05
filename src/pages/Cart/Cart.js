@@ -2,19 +2,23 @@ import {useState,useEffect} from 'react';
 import './Cart.css';
 import CartItemTray from '../../components/CartItemTray/CartItemTray.js';
 import CartBill from '../../components/CartBill/CartBill.js';
+import { useHistory } from "react-router-dom";
 
 const Cart = props =>{
+  let history = useHistory();
   const [cartData, setCartData] = useState([]);
   const [qtyChange, setQtyChange] = useState();
-  
+  const [billData, setBillData] = useState([]);
+  const [reload, setReload] = useState(false);
 
-  const alterItemQty = (id, isIncrease) => {
+  const alterItemQty = (id, isIncrease,limit) => {
     if(isIncrease){
       var data = {
         user_id: props.userData.id,
-        product_id : id
+        product_id : id,
+        table:'cart'
       }
-        const url = 'http://localhost:5000/addToCart';
+        const url = 'http://localhost:5000/addTo';
         fetch(url, {
           method: "post",
           body: JSON.stringify(data),
@@ -22,15 +26,13 @@ const Cart = props =>{
         }).then(function (response) {
           return response.json(data);
         }).then(function (data) {
-          window.scrollTo({
-            top: 0
-          })
         })
     }
     else{
       console.log("else");
       var data = {
-        cart_id:id
+        product_id:id,
+        limit
       }
         const url = 'http://localhost:5000/deleteFromCart';
         fetch(url, {
@@ -48,7 +50,7 @@ const Cart = props =>{
   useEffect(() => {
     const url = 'http://localhost:5000/openCart';
     var data = {
-      user_id: props.userData.id
+      user_id: props.userData.id,
     }
     fetch(url, {
       method: "post",
@@ -60,34 +62,60 @@ const Cart = props =>{
       setCartData(data);
       console.log(data);
     })
-  },[qtyChange,props]);
+  },[props,reload]);
 
-  const [itemDelete, setItemDelete] = useState(0);
-  
-  // useEffect(() => {
-  //   setCartData((cartItems) => cartItems.filter((cartData) => data.id !== itemDelete));
-  // }, [itemDelete]);
+  useEffect(() => {
+    const url = 'http://localhost:5000/cartBill';
+    var data = {
+      user_id: props.userData.id,
+    }
+    fetch(url, {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: { "Content-type": "application/json" }
+    }).then(function (response) {
+      return response.json(data);
+    }).then(function (data) {
+      setBillData(data);
+      console.log(data);
+    })
+  },[props,qtyChange,reload]);
 
-
-  
-
-  
+  const order =()=>{
+    const url = 'http://localhost:5000/cartOrderAll';
+    var data = {
+      user_id: props.userData.id
+    }
+    fetch(url, {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: { "Content-type": "application/json" }
+    }).then(function (response) {
+      return response.json(data);
+    }).then(function (data) {
+      window.scrollTo({
+        top: 0
+      })
+      history.push("/orders");
+    })
+  }
 
   const tray = cartData&&cartData.map((data, index) =>
-    <CartItemTray key={index} qtyChange={qtyChange} setQtyChange={setQtyChange} delete={setItemDelete} alterQty={alterItemQty} data={data}/>
+    <CartItemTray reload={reload} setReload={setReload} key={index} qtyChange={qtyChange} setQtyChange={setQtyChange} alterQty={alterItemQty} data={data}/>
   );
 
   return(
-    <div className="cartFull">
-      <div className="cartWindow">
-        <div className="cartItemContainer">
-          <div className="cartHeader"><p>My Cart ({cartData.length})</p></div>
-          {tray}
-          <div className="cartFooter"><button className='CartBuyBtn'>Place Order</button></div>
+    <div className="backgroundColor">
+      <div className="cartFull">
+        <div className="cartWindow">
+          <div className="cartItemContainer">
+            <div className="cartHeader"><p>My Cart ({cartData.length})</p></div>
+            {tray}
+            <div className="cartFooter"><button onClick={order} className='CartBuyBtn'>Place Order</button></div>
+          </div>
+          <CartBill data={billData}/>
         </div>
-        <CartBill data={cartData}/>
       </div>
-      
     </div>
   );
 }
