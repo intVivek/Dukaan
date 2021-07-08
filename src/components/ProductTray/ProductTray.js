@@ -12,7 +12,7 @@ const ProductTray = props=>{
         discount=Math.floor(((rp-dp)*100/rp));
   
   return(
-    <div onClick={()=>{window.scrollTo({top: 0});history.push("/product?id="+props.data.id);}} className="ProductTrayContainer">
+    <div onClick={()=>{history.push("/product?id="+props.data.id);}} className="ProductTrayContainer">
       <div className="ProductTray">
         <div className="ProductTrayImage"><img src={img[0]} alt='Product'/></div>
         <div className="ProductTraySpecList">

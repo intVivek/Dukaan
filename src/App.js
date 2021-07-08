@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import Body from './pages/Body/Body.js';
 import OrderedPage from './pages/OrderedPage/OrderedPage.js';
 import ProductPage from './pages/ProductPage/ProductPage.js';
+import Home from './pages/Home/Home.js';
 import { Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
@@ -111,6 +112,13 @@ useEffect(()=>{
       }
      
       <Switch>
+
+      <Route
+          exact path ="/"
+          render={()=>
+            <Home/>
+          }
+        />
       
       <Route
           exact path ="/product"
@@ -124,7 +132,7 @@ useEffect(()=>{
           }
         />
         <Route
-          exact path ="/"
+          exact path ="/search"
           render={()=>
             <Body 
               filterBrand={filterBrand} 

@@ -32,7 +32,7 @@ const ProductPage = props => {
   console.log(productData);
   var img = productData.image;
   var x = img && img.split(',');
-  x = x && x.filter(link => link.includes('.jpeg'));
+  x = x && [... new Set(x.filter(link => link.includes('.jpeg')))];
   const imageTray = x && x.map((data, index) =>
     <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img src={data} /></div>
   );

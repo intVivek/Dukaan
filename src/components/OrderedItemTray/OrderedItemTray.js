@@ -20,7 +20,7 @@ const OrderedItemTray =props=>{
         <div className = "OrderedTrayInfo">
           <div className = "OrderedTrayInfoOrdered">
             <div className = "OrderedTrayInfoGreen"></div>
-            <span>Delivered On {day+' '+month+' '+year}</span> 
+            <span>Ordered On {day+' '+month+' '+year}</span> 
           </div>
           <div className = "OrderedTrayInfoDelivered">Your Item Has Been Delivered</div>
         </div> 
