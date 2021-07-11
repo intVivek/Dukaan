@@ -5,7 +5,7 @@ import './Home.css';
 
 export default function App() {
   const [pageNum, setPageNum] = useState(1);
-  const { isLoading, error, products, hasMore } = useFetch(pageNum);
+  const { isLoading, error, products, hasMore } = useFetch({pageNum},'http://localhost:5000/home');
 
   const observer = useRef();
   const lastElementRef = useCallback(

@@ -1,6 +1,7 @@
 import './HomeItemTray.css';
 import icon from '../../components/ProductTray/assured.png';
 import { useHistory } from "react-router-dom";
+import {addThreeDots} from "../../utils/addThreeDots.js";
 
 const HomeItemTray = props=>{
   let history = useHistory();
@@ -11,10 +12,10 @@ const HomeItemTray = props=>{
   discount = Math.floor(((rp - dp) * 100 / rp));
 
   return(
-    <div onClick={()=>history.push("/product?id="+props.product.id)} className='CardItemBox'>
+    <div onClick={()=>window.open("/product?id="+props.product.id, '_blank')} className='CardItemBox'>
       <div className='CardItemBoxContainer'>
         <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' src={x[0]}/></div>
-        <div className='CardItemBoxName'>{props.product.product_name}</div>
+        <div className='CardItemBoxName'>{addThreeDots(props.product.product_name,70)}</div>
         <div className='CardItemBoxRating'>
          <div className ="CardRating">{props.product.product_rating}★</div>
          {props.product.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}

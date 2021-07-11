@@ -1,100 +1,116 @@
 import './FilterBox.css';
 import {useState,useEffect} from 'react';
 import assuredIcon from '../ProductTray/assured.png';
+import { useHistory,useLocation } from "react-router-dom";
+
 const FilterBox = props =>{
-  const [min,setMin]=useState('');
-  const [max,setMax]=useState('');
-  const [fourStar,setFourStar]=useState(false);
-  const [threeStar,setThreeStar]=useState(false);
-  const [twoStar,setTwoStar]=useState(false);
-  const minHandler=(e)=>{
-    if(!isNaN(e.target.value)){
-      setMin(parseInt(e.target.value));
+  var location = useLocation();
+  let history = useHistory();
+  function isNumeric(value) {
+    return /^\d+$/.test(value);
+  }
+  const query = new URLSearchParams(location.search);
+  var urlBrand=query.getAll('filterBrand');
+
+  const [min,setMin]=useState(isNumeric(query.get('minPrice'))?query.get('minPrice'):'');
+  const [max,setMax]=useState(isNumeric(query.get('maxPrice'))?query.get('maxPrice'):'');
+
+  const priceHandler=(e,set)=>{
+    if(isNumeric(e.target.value)){
+      set(parseInt(e.target.value));
+    }
+    else{
+      set('');
     }
   }
-  const maxHandler=(e)=>{
-    if(!isNaN(e.target.value)){
-      setMax(parseInt(e.target.value));
-    }
-  }
+
   const filterPriceHandler=()=>{
-    console.log(min, max);
-    if(parseInt(max)>parseInt(min)){
-      console.log('helloprice');
-      props.setFilterPrice('AND discounted_price BETWEEN '+min+' AND '+max);
+
+    if(isNumeric(min)&&isNumeric(max)&&parseInt(min)>=parseInt(max)){
+      setMin('');
+      setMax('');
+      query.delete('minPrice');
+      query.delete('maxPrice');
     }
-    setMin('');
-    setMax('');
+    else{
+      isNumeric(min)?query.set('minPrice',min):query.delete('minPrice');
+
+      isNumeric(max)?query.set('maxPrice',max):query.delete('maxPrice');
+
+    }
+    history.push('/search?'+query.toString());
+      
+    props.setReload(!props.reload);
   }
-  const fourRating=()=>{
-    setFourStar(!fourStar);
-    setThreeStar(false);  
-    setTwoStar(false);  
+
+  const filterRatingHandler=(rating)=>{
+    if(query.get('filterRating')==rating){
+      query.delete('filterRating');
+    }
+    else{
+      query.set('filterRating',rating);
+    }
+
+    history.push('/search?'+query.toString());
+    props.setReload(!props.reload);
+    
   }
-  const threeRating=()=>{
-    setFourStar(false);
-    setThreeStar(!threeStar);  
-    setTwoStar(false);  
-  }
-  const twoRating=()=>{
-    setFourStar(false);
-    setThreeStar(false);  
-    setTwoStar(!twoStar);  
-  }
+
   const filterBrandHandler=(brand)=>{
-    console.log('hello',brand);
-      if(brand in props.filterBrand){
-        props.setFilterBrand((filterBrand) => {
-          delete filterBrand[brand];
-          return {...filterBrand};
-        });
+      console.log(urlBrand)
+      if(urlBrand.includes(brand)){
+        query.delete('filterBrand');
+        urlBrand = urlBrand.filter(function(item) {
+          return item !== brand
+        })
+        urlBrand.forEach(b=>{
+          query.append('filterBrand',b)
+        })
       }
       else{
-        props.setFilterBrand((filterBrand) => {
-          const newBrand = {};
-          newBrand[brand] = brand;
-          return {...filterBrand, ...newBrand};
-        });
+        query.append('filterBrand',brand);
       }
+      history.push('/search?'+query.toString());
+      props.setReload(!props.reload);
   }
+   
+  const isAssuredHandler=()=>{
+    if(query.has('isAssured')){
+      query.delete('isAssured');
+    }
+    else{
+      query.append('isAssured',1)
+    }
+    history.push('/search?'+query.toString());
+    props.setReload(!props.reload);
+  }
+
+
   const tray = props.brand.map((data, index) =>
-    <div><input type="checkbox" defaultChecked={false} onChange={()=>filterBrandHandler(data.brand)}></input><span>{data.brand}</span></div>
+    <div key={index}><input type="checkbox" checked={urlBrand.includes(data.brand)?true:false} onChange={()=>filterBrandHandler(data.brand)}></input><span>{data.brand}</span></div>
   );
-  useEffect(()=>{
-    if(!fourStar&&!threeStar&&!twoStar){
-      props.setFilterRating('');
-    }
-    else if(fourStar){
-      props.setFilterRating(' and product_rating>=4 ');
-    }
-    else if(threeStar){
-      props.setFilterRating(' and product_rating>=3 ');
-    }
-    else if(twoStar){
-      props.setFilterRating(' and product_rating>=2 ');
-    }
-  },[fourStar,threeStar,twoStar]);
+
   return(
         <div className="filterBox">
           <div className="filterBoxName"><span>Filters</span></div>
           <div className ="filterBoxPrice">
             <span className ="filterBoxSpan"><span>Price</span></span>
             <div className ="filterBoxPriceText">
-              <input value={min} onChange={minHandler} placeholder="Min"/>
-              <input value={max} onChange={maxHandler} placeholder="Max"/>
+              <input value={min} onChange={(event)=>priceHandler(event,setMin)} placeholder="Min"/>
+              <input value={max} onChange={(event)=>priceHandler(event,setMax)} placeholder="Max"/>
               <button onClick={filterPriceHandler}>GO</button>
             </div>
           </div>
           <div className="filterBoxAssure">
-            <input type="checkbox" defaultChecked={props.isAssured} onChange={() => props.setIsAssured(!props.isAssured)}></input>
+            <input type="checkbox" defaultChecked={query.has('isAssured')} onChange={isAssuredHandler}></input>
             <img src ={assuredIcon}/>
             <span>ASSURED</span>
           </div>
           <div className="filterBoxRating">
             <span>CUSTOMER RATINGS</span>
-            <div><input type="checkbox" checked={fourStar} onClick={fourRating}></input><span>4★ & above</span></div>
-            <div><input type="checkbox" checked={threeStar} onClick={threeRating}></input><span>3★ & above</span></div>
-            <div><input type="checkbox" checked={twoStar} onClick={twoRating}></input><span>2★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==4?true:false} onChange={()=>filterRatingHandler(4)} ></input><span>4★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==3?true:false} onChange={()=>filterRatingHandler(3)} ></input><span>3★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==2?true:false} onChange={()=>filterRatingHandler(2)} ></input><span>2★ & above</span></div>
           </div>
           <div className="filterBoxBrandName"><span>Select Brands</span></div>
           <div className="filterBoxBrand">

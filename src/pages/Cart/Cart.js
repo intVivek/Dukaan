@@ -3,6 +3,7 @@ import './Cart.css';
 import CartItemTray from '../../components/CartItemTray/CartItemTray.js';
 import CartBill from '../../components/CartBill/CartBill.js';
 import { useHistory } from "react-router-dom";
+import {UseDataBase} from "../../utils/UseDataBase.js";
 
 const Cart = props =>{
   let history = useHistory();
@@ -18,32 +19,14 @@ const Cart = props =>{
         product_id : id,
         table:'cart'
       }
-        const url = 'http://localhost:5000/addTo';
-        fetch(url, {
-          method: "post",
-          body: JSON.stringify(data),
-          headers: { "Content-type": "application/json" }
-        }).then(function (response) {
-          return response.json(data);
-        }).then(function (data) {
-        })
+      UseDataBase(data,'http://localhost:5000/addTo');
     }
     else{
-      console.log("else");
       var data = {
         product_id:id,
         limit
       }
-        const url = 'http://localhost:5000/deleteFromCart';
-        fetch(url, {
-          method: "post",
-          body: JSON.stringify(data),
-          headers: { "Content-type": "application/json" }
-        }).then(function (response) {
-          return response.json(data);
-        }).then(function (data) {
-          console.log(data);
-        })
+      UseDataBase(data,'http://localhost:5000/deleteFromCart');
     }
   };
 
@@ -52,16 +35,7 @@ const Cart = props =>{
     var data = {
       user_id: props.userData.id,
     }
-    fetch(url, {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: { "Content-type": "application/json" }
-    }).then(function (response) {
-      return response.json(data);
-    }).then(function (data) {
-      setCartData(data);
-      console.log(data);
-    })
+    UseDataBase(data,url,setCartData);
   },[props,reload]);
 
   useEffect(() => {
@@ -69,16 +43,7 @@ const Cart = props =>{
     var data = {
       user_id: props.userData.id,
     }
-    fetch(url, {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: { "Content-type": "application/json" }
-    }).then(function (response) {
-      return response.json(data);
-    }).then(function (data) {
-      setBillData(data);
-      console.log(data);
-    })
+    UseDataBase(data,url,setBillData);
   },[props,qtyChange,reload]);
 
   const order =()=>{
@@ -86,18 +51,9 @@ const Cart = props =>{
     var data = {
       user_id: props.userData.id
     }
-    fetch(url, {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: { "Content-type": "application/json" }
-    }).then(function (response) {
-      return response.json(data);
-    }).then(function (data) {
-      window.scrollTo({
-        top: 0
-      })
+    UseDataBase(data,url);
+      window.scrollTo({top: 0});
       history.push("/orders");
-    })
   }
 
   const tray = cartData&&cartData.map((data, index) =>

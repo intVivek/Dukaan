@@ -1,6 +1,7 @@
 import './OrderedPage.css';
 import OrderedItemTray from '../../components/OrderedItemTray/OrderedItemTray.js';
 import { useState ,useEffect} from "react";
+import {UseDataBase} from "../../utils/UseDataBase.js";
 const OrderedPage=props=>{
 
 
@@ -11,16 +12,7 @@ const OrderedPage=props=>{
       var data = {
         user_id: props.userData.id
       }
-      fetch(url, {
-        method: "post",
-        body: JSON.stringify(data),
-        headers: { "Content-type": "application/json" }
-      }).then(function (response) {
-        return response.json(data);
-      }).then(function (data) {
-        setProductData(data);
-        console.log(data);
-      })
+      UseDataBase(data,url,setProductData);
     },[props]);
 
   

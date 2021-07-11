@@ -16,16 +16,7 @@ function App() {
   const [login, setLogin] = useState(false);
   const [userData,setUserData] = useState({});
   const [cookies, setCookie] = useCookies(['user']);
-  const [productData,setProductData] = useState([]);
-  const [page,setPage]=useState(1);
-  const [search,setSearch]=useState('');
-  const [count,setCount]=useState(0);
-  const [brand,setBrand]=useState([]);
-  const [sort,setSort]=useState('popularity');
-  const [filterPrice,setFilterPrice]=useState('');
-  const [isAssured,setIsAssured]=useState(false);
-  const [filterRating,setFilterRating]=useState('');
-  const [filterBrand,setFilterBrand] =useState({});
+  const [reload,setReload] = useState(true);
 
 useEffect(()=>{
   var email = cookies.email,
@@ -53,43 +44,7 @@ useEffect(()=>{
     }
 },[]);
   
-useEffect(()=>{
-  const url = 'http://localhost:5000/product';
-  var data = {
-      search,
-      page,
-      sort,
-      filterPrice,
-      isAssured,
-      filterRating,
-      filterBrand
-  }
-      fetch(url, {
-              method: "post",
-              body: JSON.stringify(data),
-              headers: { "Content-type": "application/json" }
-      }).then(function (response) {
-              return response.json(data);
-      }).then(function (data) {
-        
-        setProductData(data[0]);
-        setCount(data[1].count);
-        setBrand(data[2]);
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        })
-      })
-},[page,search,sort,filterPrice,isAssured,filterRating,filterBrand]);
 
-
-useEffect(()=>{
-    setPage(1);
-  },[search,sort,filterPrice,isAssured,filterRating,filterBrand]);
-
-  useEffect(()=>{
-    setFilterBrand({});
-  },[search]);
 
 
   return (
@@ -99,7 +54,8 @@ useEffect(()=>{
         auth ={auth}
         login={login}
         setLogin={setLogin}
-        setSearch={setSearch}
+        reload={reload}
+        setReload={setReload}
       />      
       {login?<LoginPage 
               setCookie={setCookie} 
@@ -110,13 +66,12 @@ useEffect(()=>{
               setLogin={setLogin} 
             />:""
       }
-     
       <Switch>
 
       <Route
           exact path ="/"
           render={()=>
-            <Home/>
+            <Home />
           }
         />
       
@@ -135,20 +90,8 @@ useEffect(()=>{
           exact path ="/search"
           render={()=>
             <Body 
-              filterBrand={filterBrand} 
-              setFilterBrand={setFilterBrand} 
-              brand={brand}
-              setFilterRating={setFilterRating} 
-              isAssured={isAssured} 
-              setIsAssured={setIsAssured} 
-              setFilterPrice={setFilterPrice} 
-              setSort={setSort} 
-              search={search} 
-              count={count} 
-              page={page} 
-              setPage={setPage} 
-              productData={productData}
-              setProductData={setProductData}
+            reload={reload}
+            setReload={setReload}
             />
           }
         />

@@ -12,7 +12,7 @@ const ProductTray = props=>{
         discount=Math.floor(((rp-dp)*100/rp));
   
   return(
-    <div onClick={()=>{history.push("/product?id="+props.data.id);}} className="ProductTrayContainer">
+    <div onClick={()=>window.open("/product?id="+props.data.id, '_blank')} className="ProductTrayContainer">
       <div className="ProductTray">
         <div className="ProductTrayImage"><img src={img[0]} alt='Product'/></div>
         <div className="ProductTraySpecList">
@@ -27,7 +27,7 @@ const ProductTray = props=>{
           </ul>
         </div>
         <div className = "productTrayPrice">
-          <div><span>₹{dp.toLocaleString()}</span>{props.data.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
+          <div><span>₹{dp.toLocaleString()}</span>{props.data.assured==1?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
           <div>{rp>dp?<><p>₹{rp.toLocaleString()}</p><h4>{discount}%OFF</h4></>:""}</div>  
         </div> 
       </div>

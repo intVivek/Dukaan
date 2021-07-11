@@ -1,6 +1,6 @@
 import  { useState, useEffect } from "react";
 
-const useFetch=pageNum=> {
+const useFetch=(data,url)=> {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [products, setProducts] = useState([]);
@@ -8,14 +8,8 @@ const useFetch=pageNum=> {
 
 
   useEffect(() => {
-
     setIsLoading(true);
     setError(false);
-    const url = 'http://localhost:5000/home';
-    var data = {
-      user_id:11,
-      pageNum
-    }
     fetch(url, {
       method: "post",
       body: JSON.stringify(data),
@@ -23,15 +17,14 @@ const useFetch=pageNum=> {
     }).then(function (response) {
       return response.json(data);
     }).then(function (data) {
-      console.log(data);
       setProducts((oldProducts) => [...oldProducts, ...data]);
-      setHasMore(true);
+      data.length&&setHasMore(true);
       setIsLoading(false);
-      
-    })
-    
-
-  }, [pageNum]);
+    }).catch((error) => {
+      console.error(error);
+      setError(true)
+    });
+  }, [data.pageNum]);
 
   return { isLoading, error, products, hasMore };
 }
