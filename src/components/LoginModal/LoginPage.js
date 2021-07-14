@@ -35,19 +35,17 @@ const LoginPage = props =>{
       }
       const url = 'http://localhost:5000/login';
       fetch(url, {
+              credentials: "include",
               method: "POST",
               body: JSON.stringify(data),
               headers: { "Content-type": "application/json" }
       }).then(function (response) {
               return response.json();
       }).then(function (data) {
-        console.log(data);
               if(data[0].status===0){
                       props.setAuth(true);
                       props.setLogin(!props.login);
                       props.setUserData(data[1]);
-                      props.setCookie('email', email, { path: '/' });
-                      props.setCookie('password', password, { path: '/' });
               }
               else{
                 notification(data[0].message,'error');
@@ -92,6 +90,7 @@ const LoginPage = props =>{
         cpass
       }
       fetch(url, {
+        credentials: "include",
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-type": "application/json" }
@@ -132,8 +131,8 @@ const LoginPage = props =>{
             <div id = 'loginInputSection3' className="loginInputSection">{!reg?<TextField key={2} setValue={setPassword} placeHolder='Enter Password'/>:<TextField key={1} setValue={setEmail} placeHolder='Enter Email'/>}</div>
             <div id = 'loginInputSection4' className="loginInputSection">{!reg?<div className='PrivacyPolicy'>By continuing, you agree to Easy Buy's Terms of Use and Privacy Policy.</div>:<TextField setValue={setNumber} placeHolder='Enter Mobile Number'/>}</div>
             <div id = 'loginInputSection5' className="loginInputSection">{!reg?<button className='loginModalLoginBtn' onClick={authenticate}>Login</button>:<TextField key={2} setValue={setPassword} placeHolder='Enter Password'/>}</div>
-            <div id = 'loginInputSection6' className="loginInputSection">{!reg?<h2>OR</h2>:<TextField setValue={setCpass} placeHolder='Confirm Password'/>}</div>
-            <div id = 'loginInputSection7' className="loginInputSection">{!reg?<button className='loginModalReqOTPBtn'>Request OTP</button>:<div className='PrivacyPolicy'>By continuing, you agree to Easy Buy's Terms of Use and Privacy Policy.</div>}</div>
+            <div id = 'loginInputSection6' className="loginInputSection">{!reg?"":<TextField setValue={setCpass} placeHolder='Confirm Password'/>}</div>
+            <div id = 'loginInputSection7' className="loginInputSection">{!reg?"":<div className='PrivacyPolicy'>By continuing, you agree to Easy Buy's Terms of Use and Privacy Policy.</div>}</div>
             <div id = 'loginInputSection8' className="loginInputSection">{!reg?"":<button className='loginModalLoginBtn' onClick={register}>Register</button>}</div>
             <div id = 'loginInputSection9' className="loginInputSection">{!reg?<button onClick = {()=>setReg(!reg)}>New to Easy Buy? Create an account</button>:<button onClick = {()=>setReg(!reg)}>Existing User? Log In</button>}</div>
           </div>

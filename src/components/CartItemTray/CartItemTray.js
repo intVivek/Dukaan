@@ -1,14 +1,12 @@
 import './CartItemTray.css';
 import { useState } from 'react';
 const CartItemTray = props => {
-  console.log('hello', props.data);
   var img = props.data.image;
   var x = img && img.split(',');
   const [qty, setQty] = useState(props.data.quantity);
   const dp = props.data.discounted_price,
     rp = props.data.retail_price,
     discount = Math.floor(((rp - dp) * 100 / rp));
-  console.log(props.data.cart_id);
 
 
   return (
