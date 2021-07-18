@@ -9,9 +9,10 @@
   flex-direction : column;
 }
 .productPageMain{
+  position: relative;
   width: 90%;
-  min-height:calc(100vh - 56px);
-  height : auto;
+  min-height:100%;
+  height : fit-content;
   background-color: #fff;
   display : flex;
 
@@ -25,8 +26,9 @@
 }
 .productPageAbout{
   width : calc(100% - 550px);
-  height : 500px;
+  height : auto;
   margin-top: 15px;
+  margin-bottom : 30px;
 }
 .productPageImageThumbnail{
   width : 65px;
@@ -209,4 +211,10 @@
   width:15px;
   height:20px;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMHY3LjdoMi4xVjE0TDcgNS42SDQuMkw3IDAiIGZpbGw9IiNGRkYiLz48L3N2Zz4=);
+}
+.productBackground{
+  position: absolute;
+  width:90%;
+  height:100%;
+  background-color :#fff;
 }

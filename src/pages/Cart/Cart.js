@@ -13,8 +13,9 @@ const Cart = props =>{
   const [reload, setReload] = useState(false);
 
   const alterItemQty = (id, isIncrease,limit) => {
+    var data;
     if(isIncrease){
-      var data = {
+       data = {
         user_id: props.userData.id,
         product_id : id,
         table:'cart'
@@ -22,7 +23,7 @@ const Cart = props =>{
       UseDataBase(data,'http://localhost:5000/addTo');
     }
     else{
-      var data = {
+       data = {
         product_id:id,
         limit
       }
@@ -36,6 +37,7 @@ const Cart = props =>{
       user_id: props.userData.id,
     }
     UseDataBase(data,url,setCartData);
+    console.log(cartData);
   },[props,reload]);
 
   useEffect(() => {

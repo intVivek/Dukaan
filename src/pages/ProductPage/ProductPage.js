@@ -17,29 +17,28 @@ const ProductPage = props => {
     UseDataBase({product_id: productId},'http://localhost:5000/openProduct',setProducts);
   },[productId]);
  
-  var img = products.image;
-  var x = img && img.split(',');
-  x = x && [... new Set(x.filter(link => link.includes('.jpeg')))];
+  var x=products[1];
+  console.log(products[0]);
   const imageTray = x && x.map((data, index) =>
-    <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img src={data} /></div>
+    <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img alt="" src={data.url} /></div>
   );
 
-  var spec = products.product_specifications;
+  var spec = products[0]&&products[0].product_specifications;
   spec = spec && spec.split('|');
   spec = spec && spec.filter((data) => data.includes(':') && data.split(':')[0] && data.split(':')[1]);
   const specTray = spec && spec.map((data, i) =>
     <div key={i} className='productPageSpecListItems'><div className="productPageSpecKey">{data.split(':')[0]}</div><div className="productPageSpecValue">{data.split(':')[1]}</div></div>
   );
-  const dp = products.discounted_price,
-    rp = products.retail_price,
+  const dp = products[0]&&products[0].discounted_price,
+    rp = products[0]&&products[0].retail_price,
     discount = Math.floor(((rp - dp) * 100 / rp));
-  var description = products.description;
+  var description = products[0]&&products[0].description;
 
   const addToCartHandler=()=>{
     if(props.auth){
       var data = {
         user_id: props.userData.id,
-        product_id:products.id,
+        product_id:products[0]&&products[0].id,
         table:'cart'
       }
       UseDataBase(data,'http://localhost:5000/addTo');
@@ -55,8 +54,8 @@ const ProductPage = props => {
     if(props.auth){
       var data = {
         user_id: props.userData.id,
-        product_id:products.id,
-        price:products.discounted_price,
+        product_id:products[0]&&products[0].id,
+        price:products[0]&&products[0].discounted_price,
         quantity:1
       }
       UseDataBase(data,'http://localhost:5000/buyNow');
@@ -70,6 +69,7 @@ const ProductPage = props => {
 
   return (
     <div className="productPage">
+      <div className='productBackground'>hello</div>
       <div className="productPageMain">
         <div className="productPageImageMain">
           <div className="productPageImageThumbnail">
@@ -77,17 +77,17 @@ const ProductPage = props => {
           </div>
           <div className="productPageImageDisplay">
             <div className="productPageImageShow">
-              {<img src={x && x[displayImg]} />}
+              {<img alt="" src={x && x[displayImg].url} />}
             </div>
             <div className="productPageBuyButtons">
-              <button onClick={addToCartHandler} className="productAddToCartBtn"><img className='cartImg' src={cartIcon}/> ADD TO CART</button>
+              <button onClick={addToCartHandler} className="productAddToCartBtn"><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</button>
               <button onClick={buyNowHandler} className="productbuyBtn"><div></div> &nbsp;BUY NOW</button>
             </div>
           </div>
         </div>
         <div className="productPageAbout">
-          <div className="productPageAboutName"><span>{products.product_name}</span></div>
-          <div className="productRating">{products.product_rating} ★</div>
+          <div className="productPageAboutName"><span>{products[0]&&products[0].product_name}</span></div>
+          <div className="productRating">{products[0]&&products[0].product_rating} ★</div>
           <div className='ProductPagePrice'>
             <div className='ProductPageDiscountedPrice'>₹{dp && dp.toLocaleString()}</div>
             <div className='ProductPageActualPrice'>₹{rp && rp.toLocaleString()}</div>

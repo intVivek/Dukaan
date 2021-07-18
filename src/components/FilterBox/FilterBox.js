@@ -1,5 +1,5 @@
 import './FilterBox.css';
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import assuredIcon from '../ProductTray/assured.png';
 import { useHistory,useLocation } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const FilterBox = props =>{
   }
 
   const filterRatingHandler=(rating)=>{
-    if(query.get('filterRating')==rating){
+    if(query.get('filterRating')===''+rating){
       query.delete('filterRating');
     }
     else{
@@ -57,7 +57,6 @@ const FilterBox = props =>{
   }
 
   const filterBrandHandler=(brand)=>{
-      console.log(urlBrand)
       if(urlBrand.includes(brand)){
         query.delete('filterBrand');
         urlBrand = urlBrand.filter(function(item) {
@@ -92,7 +91,10 @@ const FilterBox = props =>{
 
   return(
         <div className="filterBox">
-          <div className="filterBoxName"><span>Filters</span></div>
+          <div className="filterBoxName">
+            <span>Filters</span>
+            {query.has('minPrice')||query.has('maxPrice')||query.has('isAssured')||query.has('filterRating')||query.has('filterBrand')?<p onClick={()=>{history.push('/search?q='+query.get('q').toString());props.setReload(!props.reload);}}>Clear All</p>:""}
+          </div>
           <div className ="filterBoxPrice">
             <span className ="filterBoxSpan"><span>Price</span></span>
             <div className ="filterBoxPriceText">
@@ -102,15 +104,15 @@ const FilterBox = props =>{
             </div>
           </div>
           <div className="filterBoxAssure">
-            <input type="checkbox" defaultChecked={query.has('isAssured')} onChange={isAssuredHandler}></input>
-            <img src ={assuredIcon}/>
+            <input type="checkbox" checked={query.has('isAssured')} onChange={isAssuredHandler}></input>
+            <img src ={assuredIcon} alt='assured'/>
             <span>ASSURED</span>
           </div>
           <div className="filterBoxRating">
             <span>CUSTOMER RATINGS</span>
-            <div><input type="checkbox" checked={query.get('filterRating')==4?true:false} onChange={()=>filterRatingHandler(4)} ></input><span>4★ & above</span></div>
-            <div><input type="checkbox" checked={query.get('filterRating')==3?true:false} onChange={()=>filterRatingHandler(3)} ></input><span>3★ & above</span></div>
-            <div><input type="checkbox" checked={query.get('filterRating')==2?true:false} onChange={()=>filterRatingHandler(2)} ></input><span>2★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==='4'?true:false} onChange={()=>filterRatingHandler(4)} ></input><span>4★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==='3'?true:false} onChange={()=>filterRatingHandler(3)} ></input><span>3★ & above</span></div>
+            <div><input type="checkbox" checked={query.get('filterRating')==='2'?true:false} onChange={()=>filterRatingHandler(2)} ></input><span>2★ & above</span></div>
           </div>
           <div className="filterBoxBrandName"><span>Select Brands</span></div>
           <div className="filterBoxBrand">

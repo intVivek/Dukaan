@@ -11,6 +11,7 @@ const useFetch=(data,url)=> {
     setIsLoading(true);
     setError(false);
     fetch(url, {
+      credentials: "include",
       method: "post",
       body: JSON.stringify(data),
       headers: { "Content-type": "application/json" }

@@ -2,6 +2,7 @@
 const UseDataBase=(data,url,set)=> {
 
     fetch(url, {
+      credentials: "include",
       method: "post",
       body: JSON.stringify(data),
       headers: { "Content-type": "application/json" }

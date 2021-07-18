@@ -1,0 +1,24 @@
+.category{
+  width : 100%;
+  height : 40px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
+  background-color : #fff;
+  z-index: 1;
+  Display:flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.categoryMain{
+  width : 80%;
+  height : 100%;
+  Display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.categoryItems{
+  font-weight: 500;
+  cursor: pointer;
+}
+.categoryItems:hover{
+  color: rgb(40, 116, 240);
+}

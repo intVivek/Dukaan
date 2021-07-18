@@ -1,8 +1,7 @@
 import './CartItemTray.css';
 import { useState } from 'react';
 const CartItemTray = props => {
-  var img = props.data.image;
-  var x = img && img.split(',');
+  var img = props.data.url;
   const [qty, setQty] = useState(props.data.quantity);
   const dp = props.data.discounted_price,
     rp = props.data.retail_price,
@@ -12,7 +11,7 @@ const CartItemTray = props => {
   return (
     <div className="cartItemTray">
       <div className="cartItemTrayUpper">
-        <div className="cartItemTrayUpperLeft"><img src={x[0]} alt='Product' /></div>
+        <div className="cartItemTrayUpperLeft"><img src={img&&img} alt='Product' /></div>
         <div className="cartItemTrayUpperRight">
           <div className="cartItemName">{props.data.product_name}</div>
           <div className='cartItemPrice'>

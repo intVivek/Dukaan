@@ -2,15 +2,15 @@ import './Body.css';
 import {useState,useEffect} from 'react';
 import ProductTray from '../../components/ProductTray/ProductTray.js';
 import FilterBox from '../../components/FilterBox/FilterBox.js';
+import Category from '../../components/Category/Category.js';
 import { useHistory,useLocation } from "react-router-dom";
 import Pagination from '@material-ui/lab/Pagination';
-import PaginationItem from '@material-ui/lab/PaginationItem';
+
 
 const Body = props =>{
   var location = useLocation();
   let history = useHistory();
   const query = new URLSearchParams(location.search);
-  
   const [productData,setProductData] = useState([]);
   const [count,setCount]=useState(0);
   const [brand,setBrand]=useState([]);
@@ -38,15 +38,14 @@ const Body = props =>{
         filterRating,
         filterBrand
     }
-    console.log(data);
         fetch(url, {
+                credentials: "include",
                 method: "post",
                 body: JSON.stringify(data),
                 headers: { "Content-type": "application/json" }
         }).then(function (response) {
                 return response.json(data);
         }).then(function (data) {
-          console.log(data);
           setProductData(data[0]);
           setCount(data[1][0].count);
           setBrand(data[2]);
@@ -78,7 +77,7 @@ const Body = props =>{
   };
   return(
     <div className = 'MainBody'>
-      <div className="bodyHeader">hello</div>
+      <Category reload={props.reload} setReload={props.setReload}/>
       <div className="BodyDisplay">
         <div className="BodyDisplayGap"></div>
         <FilterBox reload={props.reload} setReload={props.setReload} brand={brand}/>
