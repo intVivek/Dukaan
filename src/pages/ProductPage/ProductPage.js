@@ -39,9 +39,9 @@ const ProductPage = props => {
       var data = {
         user_id: props.userData.id,
         product_id:products[0]&&products[0].id,
-        table:'cart'
+        quantity:1
       }
-      UseDataBase(data,'http://localhost:5000/addTo');
+      UseDataBase(data,'http://localhost:5000/addToCart');
       window.scrollTo({top: 0});
       history.push("/cart");
     }

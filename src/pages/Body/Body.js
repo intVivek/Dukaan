@@ -5,6 +5,9 @@ import FilterBox from '../../components/FilterBox/FilterBox.js';
 import Category from '../../components/Category/Category.js';
 import { useHistory,useLocation } from "react-router-dom";
 import Pagination from '@material-ui/lab/Pagination';
+import BodyLoading from './BodyLoading.js';
+import noResultFound from './noResultFound.png';
+import ErrorPage from '../ErrorPage/ErrorPage.js'
 
 
 const Body = props =>{
@@ -14,7 +17,8 @@ const Body = props =>{
   const [productData,setProductData] = useState([]);
   const [count,setCount]=useState(0);
   const [brand,setBrand]=useState([]);
-
+  const [loading,setLoading]=useState(true);
+  const [error,setError]=useState(false);
 
   var search  = query.get('q'),
   page        = query.get('page'),
@@ -46,14 +50,17 @@ const Body = props =>{
         }).then(function (response) {
                 return response.json(data);
         }).then(function (data) {
-          setProductData(data[0]);
           setCount(data[1][0].count);
+          setProductData(data[0]);
           setBrand(data[2]);
           window.scrollTo({
             top: 0,
             behavior: 'smooth',
           })
-        })
+          setLoading(false);
+        }).catch(function(error) {
+          setError(true);
+      });
   },[props.reload]);
   
   const tray = productData.map((data, index) =>
@@ -75,15 +82,20 @@ const Body = props =>{
     history.push('/search?'+query.toString());
     props.setReload(!props.reload);
   };
+  const zero = <div class="bodyNoResult">
+                  <img src={noResultFound}/>
+                  <span>Sorry, no results found!</span>
+                  <p>Please check the spelling or try searching for something else</p>
+                </div>
   return(
-    <div className = 'MainBody'>
+    error?<ErrorPage/>:<div className = 'MainBody'>
       <Category reload={props.reload} setReload={props.setReload}/>
       <div className="BodyDisplay">
         <div className="BodyDisplayGap"></div>
         <FilterBox reload={props.reload} setReload={props.setReload} brand={brand}/>
         <div className="itemBox">
           <div className='productSort'>
-          <div className='productSortTop'><span>{search?search:"All Products"}</span><p>({s})</p></div>
+          <div className='productSortTop'><span>{search?search:"All Products"}</span>{count&&!loading?<p>({s})</p>:""}</div>
           <div className='productSortBottom'>
             <span>Sort By</span>
             <button className={getClassName('popularity')} onClick={()=>sortHandler('popularity')}>Popularity</button>
@@ -92,12 +104,11 @@ const Body = props =>{
             <button className={getClassName('discounted_price DESC')} onClick={()=>sortHandler('discounted_price DESC')}>Price -- High to Low</button>
           </div>
           </div>
-          {tray}
+          {loading?<BodyLoading/>:count?tray:zero}
           <div className ='bodyPagesChange'>
           <Pagination count={Math.ceil(count/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>
           </div>
         </div>
-        
       </div>
     </div>
   ); 

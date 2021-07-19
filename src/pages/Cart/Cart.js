@@ -2,51 +2,52 @@ import {useState,useEffect} from 'react';
 import './Cart.css';
 import CartItemTray from '../../components/CartItemTray/CartItemTray.js';
 import CartBill from '../../components/CartBill/CartBill.js';
+import LoadingBox from '../../components/LoadingBox/LoadingBox.js';
 import { useHistory } from "react-router-dom";
 import {UseDataBase} from "../../utils/UseDataBase.js";
 
 const Cart = props =>{
   let history = useHistory();
   const [cartData, setCartData] = useState([]);
-  const [qtyChange, setQtyChange] = useState();
-  const [billData, setBillData] = useState([]);
-  const [reload, setReload] = useState(false);
 
-  const alterItemQty = (id, isIncrease,limit) => {
-    var data;
-    if(isIncrease){
-       data = {
-        user_id: props.userData.id,
-        product_id : id,
-        table:'cart'
-      }
-      UseDataBase(data,'http://localhost:5000/addTo');
+  const alterItemQty = (id,cart_id, quantity, index) => {
+    var data = {
+      user_id: props.userData.id,
+      product_id : id,
+      cart_id,
+      quantity
     }
-    else{
-       data = {
-        product_id:id,
-        limit
-      }
-      UseDataBase(data,'http://localhost:5000/deleteFromCart');
-    }
+    setCartData((oldCartData) => {
+      oldCartData[index]['quantity'] = quantity;
+      return [...oldCartData];
+    });
+    UseDataBase(data,'http://localhost:5000/alterQty');
   };
+
+  const deleteItem =(id,cart_id,index)=>{
+    var data = {
+      user_id: props.userData.id,
+      product_id : id,
+      cart_id
+    }
+    setCartData((oldCartData) => {
+      oldCartData.splice (index, index+1)
+      return [...oldCartData];
+    });
+    UseDataBase(data,'http://localhost:5000/deleteFromCart');
+  }
 
   useEffect(() => {
     const url = 'http://localhost:5000/openCart';
     var data = {
       user_id: props.userData.id,
     }
-    UseDataBase(data,url,setCartData);
-    console.log(cartData);
-  },[props,reload]);
+    UseDataBase(data, url,setCartData);
+  },[props]);
 
   useEffect(() => {
-    const url = 'http://localhost:5000/cartBill';
-    var data = {
-      user_id: props.userData.id,
-    }
-    UseDataBase(data,url,setBillData);
-  },[props,qtyChange,reload]);
+    console.log('cart',cartData);
+  },[cartData]);
 
   const order =()=>{
     const url = 'http://localhost:5000/cartOrderAll';
@@ -58,20 +59,22 @@ const Cart = props =>{
       history.push("/orders");
   }
 
-  const tray = cartData&&cartData.map((data, index) =>
-    <CartItemTray reload={reload} setReload={setReload} key={index} qtyChange={qtyChange} setQtyChange={setQtyChange} alterQty={alterItemQty} data={data}/>
-  );
-
   return(
     <div className="backgroundColor">
       <div className="cartFull">
+        <LoadingBox/>
         <div className="cartWindow">
           <div className="cartItemContainer">
             <div className="cartHeader"><p>My Cart ({cartData.length})</p></div>
-            {tray}
+            {
+              cartData && cartData.map((cartItem, i) =>{
+                console.log('newData',cartItem)
+              return  <CartItemTray key={i} index={i} deleteItem={deleteItem} alterQty={alterItemQty} data={cartItem}/>
+              })
+            }
             <div className="cartFooter"><button onClick={order} className='CartBuyBtn'>Place Order</button></div>
           </div>
-          <CartBill data={billData}/>
+          <CartBill data={cartData}/>
         </div>
       </div>
     </div>

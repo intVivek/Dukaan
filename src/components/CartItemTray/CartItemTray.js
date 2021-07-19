@@ -1,22 +1,17 @@
 import './CartItemTray.css';
-import { useState } from 'react';
 const CartItemTray = props => {
-  var img = props.data.url;
-  const [qty, setQty] = useState(props.data.quantity);
-  const dp = props.data.discounted_price,
-    rp = props.data.retail_price,
-    discount = Math.floor(((rp - dp) * 100 / rp));
-
+  const {url: img, discounted_price, retail_price,product_name,quantity,product_id,cart_id} = props?.data || {};
+  const discount = Math.floor(((retail_price - discounted_price) * 100 / retail_price));
 
   return (
     <div className="cartItemTray">
       <div className="cartItemTrayUpper">
         <div className="cartItemTrayUpperLeft"><img src={img&&img} alt='Product' /></div>
         <div className="cartItemTrayUpperRight">
-          <div className="cartItemName">{props.data.product_name}</div>
+          <div className="cartItemName">{product_name}</div>
           <div className='cartItemPrice'>
-            <div className='cartItemDiscountedPrice'>₹{dp && dp.toLocaleString()}</div>
-            <div className='cartItemActualPrice'>₹{rp && rp.toLocaleString()}</div>
+            <div className='cartItemDiscountedPrice'>₹{discounted_price && discounted_price.toLocaleString()}</div>
+            <div className='cartItemActualPrice'>₹{retail_price && retail_price.toLocaleString()}</div>
             <div className='cartItemDiscount'>{discount && discount} %OFF</div>
             <div className='cartItemAssured'></div>
           </div>
@@ -24,11 +19,11 @@ const CartItemTray = props => {
       </div>
       <div className="cartItemTrayLower">
         <div className="cartItemTrayLowerLeft">
-          <button onClick={() => { if (qty > 1) { props.alterQty(props.data.product_id, false,'LIMIT 1'); setQty(qty - 1); props.setQtyChange(!props.qtyChange) } }}>-</button>
-          <input placeholder={qty}></input>
-          <button onClick={() => { props.alterQty(props.data.product_id, true,''); setQty(qty + 1); props.setQtyChange(!props.qtyChange) }}>+</button>
+          <button onClick={() =>  quantity > 1 && props.alterQty(product_id,cart_id,quantity-1,props.index)}>-</button>
+          <input placeholder={quantity}></input>
+          <button onClick={() =>  props.alterQty(product_id,cart_id,quantity+1,props.index)}>+</button>
         </div>
-        <div className="cartItemTrayLowerRight"><button>SAVE FOR LATER</button><button onClick={() => { props.alterQty(props.data.product_id, false,'');props.setReload(!props.reload)}}>REMOVE</button></div>
+        <div className="cartItemTrayLowerRight"><button>SAVE FOR LATER</button><button onClick={() => props.deleteItem(product_id,cart_id,props.index)}>REMOVE</button></div>
       </div>
     </div>
   );

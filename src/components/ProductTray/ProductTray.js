@@ -3,7 +3,6 @@ import icon from './assured.png';
 
 const ProductTray = props=>{
  var img = props.data.url;
- console.log(props.data);
  var spec =props.data.product_specifications.replaceAll(':',' : ').split('|');
  spec = spec.filter((data) => data.includes(':')&&data.split(':')[0]&&data.split(':')[1]);
 

@@ -2,8 +2,8 @@ import './CartBill.css';
 
 const CartBill = props=>{
   
-  var dp= props.data.reduce((accumulator, {discounted_price,quantity}) => accumulator = accumulator + discounted_price*quantity, 0);
-  var rp= props.data.reduce((accumulator, {retail_price,quantity}) => accumulator = accumulator + retail_price*quantity, 0);
+  var dp= props?.data.reduce((accumulator, {discounted_price,quantity}) => accumulator = accumulator + discounted_price*quantity, 0);
+  var rp= props?.data.reduce((accumulator, {retail_price,quantity}) => accumulator = accumulator + retail_price*quantity, 0);
   var discount = rp-dp;
   return(
     <div className='cartBill'>

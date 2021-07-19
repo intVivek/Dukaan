@@ -9,7 +9,7 @@ const UseDataBase=(data,url,set)=> {
     }).then(function (response) {
       return response.json(data);
     }).then(function (dataSet) {
-      set&&set(dataSet);
+      set && set(dataSet);
     })
 }
 

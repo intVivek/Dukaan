@@ -1,0 +1,21 @@
+.skeleton-loader{
+ 
+  display: block;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(250, 250, 250, 0.8) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    rgba(240, 240, 240, 0.795);
+  background-repeat: repeat-y;
+  border-radius: 7px;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite ease-out;
+}
+@keyframes shine {
+  to {
+    background-position: 120% 0;
+  }
+}
