@@ -24,11 +24,10 @@ const logOutHandler=()=>{
   UseDataBase(data,'http://localhost:5000/logout',(dataSet)=>{
     console.log(dataSet);
     if(dataSet?.status===0){
-      props.setUserData({});
       console.log('user',props.userData);
       props.setAuth(false);
       setMenu(false);
-      history.push("/");
+      history.push("/home");
       notification(dataSet?.message,'success');
     }
     else{
@@ -71,10 +70,10 @@ const notification = (message,type) =>{
           <button  className="dropbtn">{props?.userData?.name}<img alt='arrow' src={arrow}/></button>
           {menu?
           <div className="dropdown-content">
-            <button disabled={true}>Profile</button>
-            <button onClick={openOrderHandler} >orders</button>
-            <button disabled={true} >Wishlist</button>
-            <button onClick={logOutHandler}>Log Out</button>
+            <button >Profile</button>
+            <button className='enabled' onClick={openOrderHandler} >orders</button>
+            <button >Wishlist</button>
+            <button className='enabled' onClick={logOutHandler}>Log Out</button>
           </div>:""}
         </div>
       );

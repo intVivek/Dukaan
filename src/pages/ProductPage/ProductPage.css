@@ -2,6 +2,7 @@
 .productPage{
   width: 100%;
   background-color: #f1f3f6;
+  height: 100vw;
   display: flex;
   justify-content:center;
   align-items:center;

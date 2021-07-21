@@ -5,7 +5,7 @@ const CartItemTray = props => {
 
   return (
     <div className="cartItemTray">
-      <div className="cartItemTrayUpper">
+      <div onClick={()=>window.open("/product?id="+props.data.product_id, '_blank')} className="cartItemTrayUpper">
         <div className="cartItemTrayUpperLeft"><img src={img&&img} alt='Product' /></div>
         <div className="cartItemTrayUpperRight">
           <div className="cartItemName">{product_name}</div>

@@ -26,7 +26,7 @@ const OrderedPage=props=>{
     <OrderedItemTray key={index} data={data}/>
   );
   return(
-    error?<ErrorPage/>:empty?<EmptyPage name={'No Orders Yet'}/>:loading?<div className='orderedLoading'><img src ={loadingImg}/><span>Loading Orders</span></div>:
+    error?<ErrorPage/>:empty?<EmptyPage name={'No Orders Yet'}/>:loading?<div className='orderedLoading'><img src ={loadingImg} alt=''/><span>Loading Orders</span></div>:
     <div className="backgroundColor">
       <div className="OrderedPageMain">
       <div  className="OrderedPageContainer">

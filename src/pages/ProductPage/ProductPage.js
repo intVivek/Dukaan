@@ -99,8 +99,8 @@ const ProductPage = props => {
               {<img alt="" src={x && x[displayImg].url} />}
             </div>
             <div className="productPageBuyButtons">
-              <button onClick={addToCartHandler} className="productAddToCartBtn">{cartButtonLoading?<img src={buttonLoadingImg}/>:<><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</>}</button>
-              <button onClick={buyNowHandler} className="productbuyBtn">{BuyButtonLoading?<img src={buttonLoadingImg}/>:<><div></div> &nbsp;BUY NOW</>}</button>
+              <button onClick={addToCartHandler} className="productAddToCartBtn">{cartButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</>}</button>
+              <button onClick={buyNowHandler} className="productbuyBtn">{BuyButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><div></div> &nbsp;BUY NOW</>}</button>
             </div>
           </div>
         </div>

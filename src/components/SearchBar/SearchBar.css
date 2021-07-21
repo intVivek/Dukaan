@@ -30,4 +30,9 @@
   cursor: pointer;
   font-size: 20px;
 }
+.searchButton >img{
+  margin-top:3px;
+  max-width:25px;
+  max-height: 25px;
+}
 

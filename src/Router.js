@@ -1,5 +1,5 @@
 import App from './App';
-import { Route, Switch, Redirect ,useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 const Router = (props) =>{
 

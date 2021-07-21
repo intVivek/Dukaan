@@ -1,6 +1,7 @@
 import './SearchBar.css';
 import {useState,useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import searchIcon from './searchIcon.svg';
 
 const SearchBar = (props) =>{
   const [searchText,setSearchText]=useState('');
@@ -21,6 +22,7 @@ const SearchBar = (props) =>{
         <div className="search">
         <input className="searchTerm" onKeyDown={(e) =>{e.keyCode === 13 && searchText && handleSubmit(e)}} value={searchText} onChange={(event) => {setSearchText(event.target.value)}} placeholder="What are you looking for?"/>
         <button  className="searchButton" onClick={searchText && handleSubmit}>
+          <img src={searchIcon} alt=""/>
         </button>
         </div>
   );

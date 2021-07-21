@@ -12,7 +12,7 @@ const UseDataBase=(data,url,set,loading,error,empty)=> {
       set && set(dataSet);
       console.log('dataSet',dataSet)
       loading&&loading(false);
-      if(dataSet.length==0){
+      if(dataSet.length===0){
         empty&&empty(true);
       }
       else{

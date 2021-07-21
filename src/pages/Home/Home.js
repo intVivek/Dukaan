@@ -29,7 +29,7 @@ export default function Home(props) {
     <HomeItemTray product={product}/>
   );
   return (
-    error?<ErrorPage/>:isLoading&&pageNum==1?<div className="homeLoading"><img src={loadingImg}/></div>:
+    error?<ErrorPage/>:isLoading&&pageNum===1?<div className="homeLoading"><img src={loadingImg} alt=''/></div>:
       <div  className="homePageMain">
       <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
       <div className="homePage">

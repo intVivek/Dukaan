@@ -8,7 +8,6 @@ import CartLoading from './CartLoading.js';
 import ErrorPage from '../ErrorPage/ErrorPage.js';
 import EmptyPage from '../EmptyPage/EmptyPage.js';
 import buttonLoadingImg from '../../buttonLoading.svg';
-import { useParams } from 'react-router-dom';
 
 const Cart = props =>{
   let history = useHistory();
@@ -64,7 +63,7 @@ const Cart = props =>{
       user_id: props.userData.id
     }
     props.userData.id && UseDataBase(data,url,(dataSet)=>{
-      if(dataSet.status==0){
+      if(dataSet.status===0){
       setButtonLoading(false);
       window.scrollTo({top: 0});
       history.push("/orders");

@@ -68,7 +68,7 @@ const Body = props =>{
     props.setReload(!props.reload);
   };
   const zero = <div class="bodyNoResult">
-  <img src={noResultFound}/>
+  <img src={noResultFound} alt=''/>
   <span>Sorry, no results found!</span>
   <p>Please check the spelling or try searching for something else</p>
 </div>
@@ -82,7 +82,7 @@ const Body = props =>{
         <FilterBox reload={props.reload} setLoading={props.setLoading} setReload={props.setReload} brand={productData[2]}/>
         <div className="itemBox">
           <div className='productSort'>
-          <div className='productSortTop'><span>{search?search:"All Products"}</span>{!props.loading?<p>({s})</p>:""}</div>
+          <div className='productSortTop'><span>{search?search:"All Products"}</span>{!props.loading&&tray?.length>0?<p>({s})</p>:""}</div>
           <div className='productSortBottom'>
             <span>Sort By</span>
             <button className={getClassName('popularity')} onClick={()=>sortHandler('popularity')}>Popularity</button>

@@ -1,12 +1,16 @@
 import './Category.css';
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 const Category = props =>{
+  var location = useLocation();
   let history = useHistory();
+  const query = new URLSearchParams(location.search);
   const clickHandler = (q) =>{
-    console.log(props);
-    props.setLoading(true);
-    history.push('/search?q='+q+'&page=1&sort=popularity');
-    props.setReload(!props.reload);
+    if(query.get('q')!==q){
+      console.log(props);
+      props.setLoading(true);
+      history.push('/search?q='+q+'&page=1&sort=popularity');
+      props.setReload(!props.reload);
+    }
   }
   return(
     <div className="category">
