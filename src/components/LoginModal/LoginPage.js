@@ -36,7 +36,7 @@ const LoginPage = props =>{
         email,
         password   
       }
-      UseDataBase(data,'http://localhost:5000/login',(dataSet)=>{
+      UseDataBase(data,'https://dukaan--app.herokuapp.com/login',(dataSet)=>{
         console.log(dataSet);
         if(dataSet?.[0]?.status===0){
           props.setAuth(true);
@@ -85,7 +85,7 @@ const LoginPage = props =>{
         password,
         cpass
       }
-      UseDataBase(data,'http://localhost:5000/register',(dataSet)=>{
+      UseDataBase(data,'https://dukaan--app.herokuapp.com/register',(dataSet)=>{
         console.log(dataSet)
         if(dataSet.status===0){
           setReg(!reg);

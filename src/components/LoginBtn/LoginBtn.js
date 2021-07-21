@@ -21,7 +21,7 @@ const logOutHandler=()=>{
 
   setButtonLoading(true);
   var data = {}
-  UseDataBase(data,'http://localhost:5000/logout',(dataSet)=>{
+  UseDataBase(data,'https://dukaan--app.herokuapp.com/logout',(dataSet)=>{
     console.log(dataSet);
     if(dataSet?.status===0){
       console.log('user',props.userData);

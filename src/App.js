@@ -20,7 +20,7 @@ function App() {
 
   useEffect(()=>{
       var data = {}
-        UseDataBase(data,'http://localhost:5000/isLogin',(dataSet)=>{
+        UseDataBase(data,'https://dukaan--app.herokuapp.com/isLogin',(dataSet)=>{
           if(dataSet){
             setUserData(dataSet[0])
             setAuth(true);

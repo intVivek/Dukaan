@@ -28,7 +28,7 @@ const Body = props =>{
 
   useEffect(()=>{
 
-    const url = 'http://localhost:5000/product';
+    const url = 'https://dukaan--app.herokuapp.com/product';
     var data = {
         search,
         page,
