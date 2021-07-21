@@ -6,18 +6,15 @@ import Category from '../../components/Category/Category.js';
 import { useHistory,useLocation } from "react-router-dom";
 import Pagination from '@material-ui/lab/Pagination';
 import BodyLoading from './BodyLoading.js';
+import {UseDataBase} from "../../utils/UseDataBase.js";
+import ErrorPage from '../ErrorPage/ErrorPage.js';
 import noResultFound from './noResultFound.png';
-import ErrorPage from '../ErrorPage/ErrorPage.js'
-
 
 const Body = props =>{
   var location = useLocation();
   let history = useHistory();
   const query = new URLSearchParams(location.search);
   const [productData,setProductData] = useState([]);
-  const [count,setCount]=useState(0);
-  const [brand,setBrand]=useState([]);
-  const [loading,setLoading]=useState(true);
   const [error,setError]=useState(false);
 
   var search  = query.get('q'),
@@ -42,60 +39,50 @@ const Body = props =>{
         filterRating,
         filterBrand
     }
-        fetch(url, {
-                credentials: "include",
-                method: "post",
-                body: JSON.stringify(data),
-                headers: { "Content-type": "application/json" }
-        }).then(function (response) {
-                return response.json(data);
-        }).then(function (data) {
-          setCount(data[1][0].count);
-          setProductData(data[0]);
-          setBrand(data[2]);
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-          setLoading(false);
-        }).catch(function(error) {
-          setError(true);
-      });
+    UseDataBase(data,url,setProductData,props.setLoading,setError);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   },[props.reload]);
   
-  const tray = productData.map((data, index) =>
+  const tray = productData[0]&&productData[0].map((data, index) =>
       <ProductTray  key={index} data={data}></ProductTray>
   ),
   getClassName = (sort) => {
     return sort === query.get('sort') ? 'active' : '';
   };
   const sortHandler=(order)=>{
+    props.setLoading(true);
     query.set('sort',order);
     history.push('/search?'+query.toString());
     props.setReload(!props.reload);
   }
 
-  var s = 'Showing '+Number(24*(page-1)+1)+' to '+Number(24*(page-1)+tray.length)+' Products of '+count+' Products';
+  var s = tray&&'Showing '+Number(24*(page-1)+1)+' to '+Number(24*(page-1)+tray.length)+' Products of '+productData[1][0].count+' Products';
 
   const pageHandler = (event, value) => {
+    props.setLoading(true);
     query.set('page',value);
     history.push('/search?'+query.toString());
     props.setReload(!props.reload);
   };
   const zero = <div class="bodyNoResult">
-                  <img src={noResultFound}/>
-                  <span>Sorry, no results found!</span>
-                  <p>Please check the spelling or try searching for something else</p>
-                </div>
+  <img src={noResultFound}/>
+  <span>Sorry, no results found!</span>
+  <p>Please check the spelling or try searching for something else</p>
+</div>
+
   return(
-    error?<ErrorPage/>:<div className = 'MainBody'>
-      <Category reload={props.reload} setReload={props.setReload}/>
+    error?<ErrorPage/>:
+    <div className = 'MainBody'>
+      <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
       <div className="BodyDisplay">
         <div className="BodyDisplayGap"></div>
-        <FilterBox reload={props.reload} setReload={props.setReload} brand={brand}/>
+        <FilterBox reload={props.reload} setLoading={props.setLoading} setReload={props.setReload} brand={productData[2]}/>
         <div className="itemBox">
           <div className='productSort'>
-          <div className='productSortTop'><span>{search?search:"All Products"}</span>{count&&!loading?<p>({s})</p>:""}</div>
+          <div className='productSortTop'><span>{search?search:"All Products"}</span>{!props.loading?<p>({s})</p>:""}</div>
           <div className='productSortBottom'>
             <span>Sort By</span>
             <button className={getClassName('popularity')} onClick={()=>sortHandler('popularity')}>Popularity</button>
@@ -104,9 +91,9 @@ const Body = props =>{
             <button className={getClassName('discounted_price DESC')} onClick={()=>sortHandler('discounted_price DESC')}>Price -- High to Low</button>
           </div>
           </div>
-          {loading?<BodyLoading/>:count?tray:zero}
+          {props.loading?<BodyLoading/>:tray?.length===0?zero:tray}
           <div className ='bodyPagesChange'>
-          <Pagination count={Math.ceil(count/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>
+          {productData?.[1]?.[0].count?<Pagination count={Math.ceil(parseInt(productData[1][0].count)/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>:''}
           </div>
         </div>
       </div>
@@ -114,4 +101,5 @@ const Body = props =>{
   ); 
 
 }
+
 export default Body;

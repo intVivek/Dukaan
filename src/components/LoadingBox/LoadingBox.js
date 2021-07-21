@@ -7,8 +7,8 @@ const LoadingBox = (props) =>{
       height:props.height,
     };
   return(
-        <div class="prod--name">
-          <span style={mystyle} class="skeleton-loader"></span>
+        <div className="prod--name">
+          <span style={mystyle} className="skeleton-loader"></span>
         </div>
   );
 }

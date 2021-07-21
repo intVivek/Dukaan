@@ -7,6 +7,7 @@ const CartBill = props=>{
   var discount = rp-dp;
   return(
     <div className='cartBill'>
+      {props.loading?"":<>
       <div className='cartBillHeader'><div>PRICE DETAILS</div></div>
       <div className='cartBillMain'>
         <div><p>Price ({props.data.length} items)</p><p>
@@ -16,7 +17,10 @@ const CartBill = props=>{
         <div className='cartMainTotal'><p>Total Amount</p><p>₹{(dp).toLocaleString()}</p></div>
         <p className='cartBillMainGreen'>You will save ₹{discount.toLocaleString()} on this order</p>
       </div>
+    </>
+    }
     </div>
   );
 }
+
 export default CartBill;

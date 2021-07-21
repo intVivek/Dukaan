@@ -2,17 +2,23 @@ import './Category.css';
 import { useHistory } from "react-router-dom";
 const Category = props =>{
   let history = useHistory();
+  const clickHandler = (q) =>{
+    console.log(props);
+    props.setLoading(true);
+    history.push('/search?q='+q+'&page=1&sort=popularity');
+    props.setReload(!props.reload);
+  }
   return(
     <div className="category">
       <div className="categoryMain">
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Electronics&page=1&sort=popularity');props.setReload(!props.reload);}}>Electronics</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Appliances&page=1&sort=popularity');props.setReload(!props.reload);}}>TVs & Appliances</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Men&page=1&sort=popularity');props.setReload(!props.reload);}}>Men</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=women&page=1&sort=popularity');props.setReload(!props.reload);}}>Women</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=kids&page=1&sort=popularity');props.setReload(!props.reload);}}>Baby & Kids</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Furniture&page=1&sort=popularity');props.setReload(!props.reload);}}>Home & Furniture</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Sports&page=1&sort=popularity');props.setReload(!props.reload);}}>Sports</span>
-      <span className="categoryItems" onClick={()=>{history.push('/search?q=Books&page=1&sort=popularity');props.setReload(!props.reload);}}>Books</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Electronics')}>Electronics</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Appliances')}>TVs & Appliances</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Men')}>Men</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Women')}>Women</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Kids')}>Baby & Kids</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Furniture')}>Home & Furniture</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Sports')}>Sports</span>
+      <span className="categoryItems" onClick={()=>clickHandler('Books')}>Books</span>
       </div>
     </div>
   );          

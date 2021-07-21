@@ -3,11 +3,14 @@ import useFetch from "../../hooks/useFetch";
 import HomeItemTray from '../../components/HomeItemTray/HomeItemTray.js';
 import './Home.css';
 import Category from '../../components/Category/Category.js';
+import loadingImg from './loading.svg';
+import ErrorPage from '../ErrorPage/ErrorPage.js';
+import loadingBottom from './loadingBottom.svg';
 
 export default function Home(props) {
   const [pageNum, setPageNum] = useState(1);
+  console.log('props',props);
   const { isLoading, error, products, hasMore } = useFetch({pageNum},'http://localhost:5000/home');
-
   const observer = useRef();
   const lastElementRef = useCallback(
     (node) => {
@@ -26,14 +29,14 @@ export default function Home(props) {
     <HomeItemTray product={product}/>
   );
   return (
-    <div  className="homePageMain">
-    <Category reload={props.reload} setReload={props.setReload}/>
-    <div className="homePage">
-        {tray}
-      <div ref={lastElementRef}></div>
-  
-      <div>{error && "Error..."}</div>
-    </div>
+    error?<ErrorPage/>:isLoading&&pageNum==1?<div className="homeLoading"><img src={loadingImg}/></div>:
+      <div  className="homePageMain">
+      <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
+      <div className="homePage">
+          {tray}
+        <div ref={lastElementRef}></div>
+      </div>
+      {hasMore && <div className='homeBottomLoading'><img src={loadingBottom} alt='more loading'/></div>}
     </div>
   );
 }

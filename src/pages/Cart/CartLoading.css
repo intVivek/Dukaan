@@ -1,28 +1,28 @@
-.bodyLoadingContainer{
+.cartLoadingContainer{
   width: 100%;
-  height: calc(100% - 56px);
+  height: 100%;
   display : flex;
   flex-direction: column;
   background-color: #fff;
   overflow: hidden;
 }
-.bodyLoadingTray{
+.cartLoadingTray{
   width: 100%;
-  height:250px;
+  height:200px;
   display: flex;
   align-items: center;
   border: 1px solid #f0f0f0!important;
 }
 
-.bodyLoadingImage{
-  width : 320px;
+.cartLoadingImage{
+  width : 200px;
   height : 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.bodyLoadingSpec{
+.cartLoadingSpec{
   width: 50%;
   height: 95%;
   display: flex;
@@ -31,7 +31,7 @@
   justify-content: space-around;
 }
 
-.bodyLoadingSpecList{
+.cartLoadingSpecList{
   width: 100%;
   height: 40%;
   display: flex;

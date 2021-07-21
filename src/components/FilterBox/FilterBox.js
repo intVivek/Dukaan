@@ -25,7 +25,7 @@ const FilterBox = props =>{
   }
 
   const filterPriceHandler=()=>{
-
+    props.setLoading(true);
     if(isNumeric(min)&&isNumeric(max)&&parseInt(min)>=parseInt(max)){
       setMin('');
       setMax('');
@@ -39,24 +39,24 @@ const FilterBox = props =>{
 
     }
     history.push('/search?'+query.toString());
-      
     props.setReload(!props.reload);
   }
 
   const filterRatingHandler=(rating)=>{
+    props.setLoading(true);
     if(query.get('filterRating')===''+rating){
       query.delete('filterRating');
     }
     else{
       query.set('filterRating',rating);
     }
-
     history.push('/search?'+query.toString());
     props.setReload(!props.reload);
     
   }
 
   const filterBrandHandler=(brand)=>{
+      props.setLoading(true);
       if(urlBrand.includes(brand)){
         query.delete('filterBrand');
         urlBrand = urlBrand.filter(function(item) {
@@ -73,7 +73,9 @@ const FilterBox = props =>{
       props.setReload(!props.reload);
   }
    
+
   const isAssuredHandler=()=>{
+    props.setLoading(true);
     if(query.has('isAssured')){
       query.delete('isAssured');
     }
@@ -85,7 +87,7 @@ const FilterBox = props =>{
   }
 
 
-  const tray = props.brand.map((data, index) =>
+  const tray = props.brand && props.brand.map((data, index) =>
     <div key={index}><input type="checkbox" checked={urlBrand.includes(data.brand)?true:false} onChange={()=>filterBrandHandler(data.brand)}></input><span>{data.brand}</span></div>
   );
 

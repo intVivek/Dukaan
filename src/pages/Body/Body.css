@@ -114,6 +114,7 @@
   position:absolute;
   bottom: 0;
   background-color:#fff;
+  overflow: hidden;
 }
 
 .bodyPagesChange>button{

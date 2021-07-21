@@ -4,17 +4,27 @@ import "./ProductPage.css";
 import cartIcon from '../../components/CartBtn/CartIcon.svg'
 import { useHistory,useLocation } from "react-router-dom";
 import {UseDataBase} from "../../utils/UseDataBase.js";
+import ProductPageLoading from './ProductPageLoading.js';
+import ErrorPage from '../ErrorPage/ErrorPage.js';
+import EmptyPage from '../EmptyPage/EmptyPage.js';
+import buttonLoadingImg from '../../buttonLoading.svg';
 
 const ProductPage = props => {
   const [products,setProducts]=useState([]);
+  const [loading,setLoading] = useState(true);
+  const [error,setError]=useState(false);
+  const [empty,setEmpty]=useState(false);
+  const [cartButtonLoading,setCartButtonLoading]=useState(false);
+  const [BuyButtonLoading,setBuyButtonLoading]=useState(false);
   var location = useLocation();
   const query = new URLSearchParams(location.search);
   let history = useHistory();
   const [displayImg, setDisplayImg] = useState(0);
   
   const productId = query.get('id');
+
   useEffect(()=>{
-    UseDataBase({product_id: productId},'http://localhost:5000/openProduct',setProducts);
+    productId && UseDataBase({product_id: productId},'http://localhost:5000/openProduct',setProducts,setLoading,setError,setEmpty);
   },[productId]);
  
   var x=products[1];
@@ -23,7 +33,7 @@ const ProductPage = props => {
     <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img alt="" src={data.url} /></div>
   );
 
-  var spec = products[0]&&products[0].product_specifications;
+  var spec = products?.[0]&&products[0].product_specifications;
   spec = spec && spec.split('|');
   spec = spec && spec.filter((data) => data.includes(':') && data.split(':')[0] && data.split(':')[1]);
   const specTray = spec && spec.map((data, i) =>
@@ -36,14 +46,19 @@ const ProductPage = props => {
 
   const addToCartHandler=()=>{
     if(props.auth){
+      setCartButtonLoading(true);
       var data = {
         user_id: props.userData.id,
         product_id:products[0]&&products[0].id,
         quantity:1
       }
-      UseDataBase(data,'http://localhost:5000/addToCart');
-      window.scrollTo({top: 0});
-      history.push("/cart");
+      props.userData.id && UseDataBase(data,'http://localhost:5000/addToCart',(dataSet)=>{
+        if(dataSet.status===0)
+        setCartButtonLoading(false);
+        window.scrollTo({top: 0});
+        history.push("/cart");
+      },setCartButtonLoading,setError);
+
     }
     else{
       props.setLogin(!props.login);
@@ -52,15 +67,19 @@ const ProductPage = props => {
 
   const buyNowHandler=()=>{
     if(props.auth){
+      setBuyButtonLoading(true);
       var data = {
         user_id: props.userData.id,
         product_id:products[0]&&products[0].id,
         price:products[0]&&products[0].discounted_price,
         quantity:1
       }
-      UseDataBase(data,'http://localhost:5000/buyNow');
-      window.scrollTo({top: 0});
-      history.push("/orders");
+      props.userData.id && UseDataBase(data,'http://localhost:5000/buyNow',(dataSet)=>{
+        if(dataSet.status===0)
+        setBuyButtonLoading(false);
+        window.scrollTo({top: 0});
+        history.push("/orders");
+      },setBuyButtonLoading,setError);
     }
     else{
       props.setLogin(!props.login);
@@ -68,8 +87,8 @@ const ProductPage = props => {
   }
 
   return (
+    error?<ErrorPage/>:empty?<EmptyPage name={'Product not Found'}/>:loading?<ProductPageLoading/>:
     <div className="productPage">
-      <div className='productBackground'>hello</div>
       <div className="productPageMain">
         <div className="productPageImageMain">
           <div className="productPageImageThumbnail">
@@ -80,8 +99,8 @@ const ProductPage = props => {
               {<img alt="" src={x && x[displayImg].url} />}
             </div>
             <div className="productPageBuyButtons">
-              <button onClick={addToCartHandler} className="productAddToCartBtn"><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</button>
-              <button onClick={buyNowHandler} className="productbuyBtn"><div></div> &nbsp;BUY NOW</button>
+              <button onClick={addToCartHandler} className="productAddToCartBtn">{cartButtonLoading?<img src={buttonLoadingImg}/>:<><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</>}</button>
+              <button onClick={buyNowHandler} className="productbuyBtn">{BuyButtonLoading?<img src={buttonLoadingImg}/>:<><div></div> &nbsp;BUY NOW</>}</button>
             </div>
           </div>
         </div>

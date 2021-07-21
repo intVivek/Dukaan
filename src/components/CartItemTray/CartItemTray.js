@@ -19,9 +19,9 @@ const CartItemTray = props => {
       </div>
       <div className="cartItemTrayLower">
         <div className="cartItemTrayLowerLeft">
-          <button onClick={() =>  quantity > 1 && props.alterQty(product_id,cart_id,quantity-1,props.index)}>-</button>
+          <button disabled={quantity===1?true:false} onClick={() =>  quantity > 1 && props.alterQty(product_id,cart_id,quantity-1,props.index)}>-</button>
           <input placeholder={quantity}></input>
-          <button onClick={() =>  props.alterQty(product_id,cart_id,quantity+1,props.index)}>+</button>
+          <button disabled={quantity>9?true:false} onClick={() =>  props.alterQty(product_id,cart_id,quantity+1,props.index)}>+</button>
         </div>
         <div className="cartItemTrayLowerRight"><button>SAVE FOR LATER</button><button onClick={() => props.deleteItem(product_id,cart_id,props.index)}>REMOVE</button></div>
       </div>

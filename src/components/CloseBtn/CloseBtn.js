@@ -1,5 +1,6 @@
 import './CloseBtn.css';
 import icon from './closeIcon.svg';
+
 const CloseBtn = props =>{
   const clickHandler =()=>{
     props.setLogin(!props.login);

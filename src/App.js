@@ -7,35 +7,45 @@ import Body from './pages/Body/Body.js';
 import OrderedPage from './pages/OrderedPage/OrderedPage.js';
 import ProductPage from './pages/ProductPage/ProductPage.js';
 import Home from './pages/Home/Home.js';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import {UseDataBase} from "./utils/UseDataBase.js";
 
 function App() {
-
+  const path = useParams().page;
   const [auth,setAuth]=useState(false);
   const [login, setLogin] = useState(false);
   const [userData,setUserData] = useState({});
   const [reload,setReload] = useState(true);
-
+  const [bodyLoading,setBodyLoading]=useState(true);
 
   useEffect(()=>{
       var data = {}
-        const url = 'http://localhost:5000/isLogin';
-        fetch(url, {
-                 credentials: "include",
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: { "Content-type": "application/json" }
-        }).then(function (response) {
-                return response.json(data);
-        }).then(function (data) {
-          if(data){
-          setUserData(data[0])
-          setAuth(true);
-          }
+        UseDataBase(data,'http://localhost:5000/isLogin',(dataSet)=>{
+          if(dataSet){
+            setUserData(dataSet[0])
+            setAuth(true);
+            }
         });
   },[]);
 
-  
+   useEffect(() => {
+    console.log(login);
+    if (login) document.querySelector('.App').style.overflow='hidden';
+    else document.querySelector('.App').style.overflow='auto';
+  }, [login]);
+
+
+console.log('path', path);
+  var page;
+  switch(path){
+    case ''        : page = <Home setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
+    case 'product' : page = <ProductPage auth={auth} login={login} setLogin={setLogin} userData={userData}/>;break;
+    case 'search'  : page = <Body loading={bodyLoading} setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
+    case 'cart'    : page = <Cart userData={userData} />;break;
+    case 'orders'  : page = <OrderedPage userData={userData}/>;break;
+    default        : page = <Home setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
+  }
+
   return (
     <div  className="App">
       <Header 
@@ -46,6 +56,8 @@ function App() {
         reload={reload}
         setReload={setReload}
         setAuth={setAuth}
+        setUserData={setUserData}
+        setBodyLoading={setBodyLoading}
       />      
       {login?<LoginPage 
               setUserData={setUserData} 
@@ -57,52 +69,7 @@ function App() {
             setReload={setReload}
             />:""
       }
-      <Switch>
-
-      <Route
-          exact path ="/"
-          render={()=>
-            <Home 
-              reload={reload}
-              setReload={setReload}
-            />
-          }
-        />
-      
-      <Route
-          exact path ="/product"
-          render={()=>
-            <ProductPage
-              auth={auth}
-              login={login}
-              setLogin={setLogin}
-              userData={userData}
-            />
-          }
-        />
-        <Route
-          exact path ="/search"
-          render={()=>
-            <Body 
-            reload={reload}
-            setReload={setReload}
-            />
-          }
-        />
-        <Route
-          exact path ="/cart"
-          render={()=>
-            <Cart userData={userData}/>
-          }
-        />
-        <Route
-          exact path ="/orders"
-          render={()=>
-            <OrderedPage userData={userData}/>
-          }
-        />
-        <Route exact path ="/*" render={()=> <Redirect path='/'/> } />
-      </Switch>
+      {page}
     </div>
   );
 }

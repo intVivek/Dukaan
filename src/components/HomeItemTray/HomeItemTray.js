@@ -3,7 +3,7 @@ import icon from '../../components/ProductTray/assured.png';
 import {addThreeDots} from "../../utils/addThreeDots.js";
 
 const HomeItemTray = props=>{
-  console.log(props.product)
+  //console.log(props.product)
   var img = props.product.url;
   const dp = props.product.discounted_price,
   rp = props.product.retail_price,
