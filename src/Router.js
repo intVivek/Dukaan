@@ -1,7 +1,7 @@
 import App from './App';
 import { Route, Switch } from "react-router-dom";
 
-const Router = (props) =>{
+const Router = () =>{
 
   return(
     <Switch>

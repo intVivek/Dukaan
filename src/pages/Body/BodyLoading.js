@@ -1,7 +1,7 @@
 import './BodyLoading.css';
 import LoadingBox from '../../components/LoadingBox/LoadingBox.js'
 
-const BodyLoading = (props) =>{
+const BodyLoading = () =>{
 
   return(
         <div className='bodyLoadingContainer'>

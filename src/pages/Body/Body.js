@@ -68,7 +68,7 @@ const Body = props =>{
     history.push('/search?'+query.toString());
     props.setReload(!props.reload);
   };
-  const zero = <div class="bodyNoResult">
+  const zero = <div className="bodyNoResult">
   <img src={noResultFound} alt=''/>
   <span>Sorry, no results found!</span>
   <p>Please check the spelling or try searching for something else</p>

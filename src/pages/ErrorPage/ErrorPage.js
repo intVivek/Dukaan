@@ -1,6 +1,6 @@
 import './ErrorPage.css';
 
-const ErrorPage = (props) =>{
+const ErrorPage = () =>{
 
   return(
     <div className='errorPage'>

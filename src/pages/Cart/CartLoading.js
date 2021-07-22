@@ -1,7 +1,7 @@
 import './CartLoading.css';
 import LoadingBox from '../../components/LoadingBox/LoadingBox.js'
 
-const CartLoading = (props) =>{
+const CartLoading = () =>{
 
   return(
         <div className='cartLoadingContainer'>

@@ -1,7 +1,7 @@
 import './ProductPageLoading.css';
 import LoadingBox from '../../components/LoadingBox/LoadingBox.js'
 
-const ProductPageLoading = (props) =>{
+const ProductPageLoading = () =>{
 
   return(
         <div className='ProductPageLoadingContainer'>

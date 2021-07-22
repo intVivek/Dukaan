@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar/SearchBar.js';
 import LoginBtn from '../LoginBtn/LoginBtn.js';
 import CartBtn from '../CartBtn/CartBtn.js';
 import { useParams } from "react-router-dom";
+import React from 'react';
 
 const Header = (props) =>{
   let history = useHistory();

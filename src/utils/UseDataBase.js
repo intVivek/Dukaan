@@ -18,7 +18,7 @@ const UseDataBase=(data,url,set,loading,error,empty)=> {
       else{
         empty&&empty(false);
       }
-    }).catch(function(err) {
+    }).catch(function() {
       error&&error(true);
   });
 }

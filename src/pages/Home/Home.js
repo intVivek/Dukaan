@@ -25,8 +25,8 @@ export default function Home(props) {
     },
     [isLoading, hasMore]
   );
-  const tray = products.map((product) =>
-    <HomeItemTray product={product}/>
+  const tray = products.map((product, index) =>
+    <HomeItemTray key={index} product={product}/>
   );
   return (
     error?<ErrorPage/>:isLoading&&pageNum===1?<div className="homeLoading"><img src={loadingImg} alt=''/></div>:
