@@ -3,7 +3,7 @@ import icon from '../../components/ProductTray/assured.png';
 import {addThreeDots} from "../../utils/addThreeDots.js";
 
 const HomeItemTray = props=>{
-  //console.log(props.product)
+
   var img = props.product.url;
   const dp = props.product.discounted_price,
   rp = props.product.retail_price,
@@ -16,7 +16,7 @@ const HomeItemTray = props=>{
         <div className='CardItemBoxName'>{addThreeDots(props.product.product_name,70)}</div>
         <div className='CardItemBoxRating'>
          <div className ="CardRating">{props.product.product_rating}★</div>
-         {props.product.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}
+         {props.product.assured==='true'?<img className="assuredIMG" src ={'https://images.weserv.nl/?url='+icon} alt='assured'></img>:""}
         </div>
         <div className='CardItemBoxPrice'>
           <div className='cardItemPrice'>
