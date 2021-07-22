@@ -6,7 +6,7 @@ const CartItemTray = props => {
   return (
     <div className="cartItemTray">
       <div onClick={()=>window.open("/product?id="+props.data.product_id, '_blank')} className="cartItemTrayUpper">
-        <div className="cartItemTrayUpperLeft"><img src={img&&(process.env.REACT_APP_IMG_URL+img)} alt='Product' /></div>
+        <div className="cartItemTrayUpperLeft"><img src={img&&('https://dukaan--app.herokuapp.com/image?url='+img)} alt='Product' /></div>
         <div className="cartItemTrayUpperRight">
           <div className="cartItemName">{product_name}</div>
           <div className='cartItemPrice'>

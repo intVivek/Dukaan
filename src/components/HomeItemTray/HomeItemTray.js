@@ -12,7 +12,7 @@ const HomeItemTray = props=>{
   return(
     <div onClick={()=>window.open("/product?id="+props.product.id, '_blank')} className='CardItemBox'>
       <div className='CardItemBoxContainer'>
-        <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' alt='img' src={process.env.REACT_APP_IMG_URL+img}/></div>
+        <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' alt='img' src={'https://dukaan--app.herokuapp.com/image?url='+img}/></div>
         <div className='CardItemBoxName'>{addThreeDots(props.product.product_name,70)}</div>
         <div className='CardItemBoxRating'>
          <div className ="CardRating">{props.product.product_rating}★</div>

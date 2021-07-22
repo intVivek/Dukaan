@@ -10,7 +10,7 @@ const OrderedItemTray =props=>{
 
   return(
     <div onClick={()=>{window.scrollTo({top: 0});history.push("/product?id="+props.data.id);}} className="OrderedTray">
-        <div className="OrderedTrayImage"><img src={process.env.REACT_APP_IMG_URL+img} alt='Product'/></div>
+        <div className="OrderedTrayImage"><img src={'https://dukaan--app.herokuapp.com/image?url='+img} alt='Product'/></div>
           <div className ="OrderedName"><span>{props.data.product_name}</span><p>{props.data.quantity>1&&('x'+props.data.quantity)}</p></div>
         <div className = "OrderedPrice">
           <div><span>₹{props.data.price.toLocaleString()}</span></div>
