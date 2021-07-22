@@ -12,7 +12,7 @@ const Router = () =>{
           }
         />
         <Route
-          path ="/"
+          path ="*"
           render={()=>
             <App/>
           }
