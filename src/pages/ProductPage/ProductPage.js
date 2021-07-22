@@ -30,7 +30,7 @@ const ProductPage = props => {
   var x=products[1];
   console.log(products[0]);
   const imageTray = x && x.map((data, index) =>
-    <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img alt="" src={data.url} /></div>
+    <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img alt="" src={process.env.REACT_APP_IMG_URL+data.url} /></div>
   );
 
   var spec = products?.[0]&&products[0].product_specifications;
@@ -96,7 +96,7 @@ const ProductPage = props => {
           </div>
           <div className="productPageImageDisplay">
             <div className="productPageImageShow">
-              {<img alt="" src={x && x[displayImg].url} />}
+              {<img alt="" src={x && process.env.REACT_APP_IMG_URL+x[displayImg].url} />}
             </div>
             <div className="productPageBuyButtons">
               <button onClick={addToCartHandler} className="productAddToCartBtn">{cartButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</>}</button>

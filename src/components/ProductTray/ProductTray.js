@@ -13,7 +13,7 @@ const ProductTray = props=>{
   return(
     <div onClick={()=>window.open("/product?id="+props.data.id, '_blank')} className="ProductTrayContainer">
       <div className="ProductTray">
-        <div className="ProductTrayImage"><img src={img} alt='Product'/></div>
+        <div className="ProductTrayImage"><img src={process.env.REACT_APP_IMG_URL+img} alt='Product'/></div>
         <div className="ProductTraySpecList">
           <div className ="productName"><span>{props.data.product_name}</span></div>
           <div className ="productRating">{props.data.product_rating}★</div>
