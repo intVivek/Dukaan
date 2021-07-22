@@ -10,7 +10,7 @@ import loadingBottom from './loadingBottom.svg';
 export default function Home(props) {
   
   const [pageNum, setPageNum] = useState(1);
-  const { isLoading, error, products, hasMore } = useFetch({pageNum}, process.env.REACT_APP_API_URL+'/home');
+  const { isLoading, error, products, hasMore } = useFetch({pageNum}, 'https://dukaan--app.herokuapp.com'+'/home');
   const observer = useRef();
   const lastElementRef = useCallback(
     (node) => {
