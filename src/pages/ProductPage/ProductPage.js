@@ -24,7 +24,7 @@ const ProductPage = props => {
   const productId = query.get('id');
 
   useEffect(()=>{
-    productId && UseDataBase({product_id: productId},'https://dukaan--app.herokuapp.com/openProduct',setProducts,setLoading,setError,setEmpty);
+    productId && UseDataBase({product_id: productId},'/openProduct',setProducts,setLoading,setError,setEmpty);
   },[productId]);
  
   var x=products[1];
@@ -52,7 +52,7 @@ const ProductPage = props => {
         product_id:products[0]&&products[0].id,
         quantity:1
       }
-      props.userData.id && UseDataBase(data,'https://dukaan--app.herokuapp.com/addToCart',(dataSet)=>{
+      props.userData.id && UseDataBase(data,'/addToCart',(dataSet)=>{
         if(dataSet.status===0)
         setCartButtonLoading(false);
         window.scrollTo({top: 0});
@@ -74,7 +74,7 @@ const ProductPage = props => {
         price:products[0]&&products[0].discounted_price,
         quantity:1
       }
-      props.userData.id && UseDataBase(data,'https://dukaan--app.herokuapp.com/buyNow',(dataSet)=>{
+      props.userData.id && UseDataBase(data,'/buyNow',(dataSet)=>{
         if(dataSet.status===0)
         setBuyButtonLoading(false);
         window.scrollTo({top: 0});

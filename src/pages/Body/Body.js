@@ -27,7 +27,7 @@ const Body = props =>{
   filterBrand = query.getAll('filterBrand');
 
   useEffect(()=>{
-    const url = 'https://dukaan--app.herokuapp.com/product';
+    const url = '/product';
     var data = {
         search,
         page,

@@ -25,7 +25,7 @@ const useFetch=(data,url)=> {
       console.error(error);
       setError(true)
     });
-  }, [data,url]);
+  }, [data.pageNum]);
 
   return { isLoading, error, products, hasMore };
 }

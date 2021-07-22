@@ -14,7 +14,7 @@ const OrderedPage=props=>{
   const [empty,setEmpty]=useState(false);
 
     useEffect(() => {
-      const url = 'https://dukaan--app.herokuapp.com/openOrders';
+      const url = '/openOrders';
       var data = {
         user_id: props.userData.id
       }

@@ -7,11 +7,11 @@ import Body from './pages/Body/Body.js';
 import OrderedPage from './pages/OrderedPage/OrderedPage.js';
 import ProductPage from './pages/ProductPage/ProductPage.js';
 import Home from './pages/Home/Home.js';
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import {UseDataBase} from "./utils/UseDataBase.js";
 
 function App() {
-  const path = useParams().page;
+  const path = useParams().page || '';
   const [auth,setAuth]=useState(false);
   const [login, setLogin] = useState(false);
   const [userData,setUserData] = useState({});
@@ -20,7 +20,7 @@ function App() {
 
   useEffect(()=>{
       var data = {}
-        UseDataBase(data,'https://dukaan--app.herokuapp.com/isLogin',(dataSet)=>{
+        UseDataBase(data,'https://http://localhost:5000'+'/isLogin',(dataSet)=>{
           if(dataSet){
             setUserData(dataSet[0])
             setAuth(true);
@@ -43,7 +43,7 @@ console.log('path', path);
     case 'search'  : page = <Body loading={bodyLoading} setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
     case 'cart'    : page = <Cart userData={userData} />;break;
     case 'orders'  : page = <OrderedPage userData={userData}/>;break;
-    default        : page = <Home setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
+    default        : page = <Redirect to='/'/>;break;
   }
 
   return (

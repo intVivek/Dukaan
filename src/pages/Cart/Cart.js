@@ -28,7 +28,7 @@ const Cart = props =>{
       oldCartData[index]['quantity'] = quantity;
       return [...oldCartData];
     });
-    UseDataBase(data,'https://dukaan--app.herokuapp.com/alterQty');
+    UseDataBase(data,'/alterQty');
   };
 
   const deleteItem =(id,cart_id,index)=>{
@@ -41,11 +41,11 @@ const Cart = props =>{
       oldCartData.splice (index, index+1)
       return [...oldCartData];
     });
-    UseDataBase(data,'https://dukaan--app.herokuapp.com/deleteFromCart');
+    UseDataBase(data,'/deleteFromCart');
   }
 
   useEffect(() => {
-    const url = 'https://dukaan--app.herokuapp.com/openCart';
+    const url = '/openCart';
     var data = {
       user_id: props.userData.id,
     }
@@ -58,7 +58,7 @@ const Cart = props =>{
 
   const order =()=>{
     setButtonLoading(true);
-    const url = 'https://dukaan--app.herokuapp.com/cartOrderAll';
+    const url = 'cartOrderAll';
     var data = {
       user_id: props.userData.id
     }
