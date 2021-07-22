@@ -2,7 +2,7 @@
 
 const UseDataBase=(data,url,set,loading,error,empty)=> {
     
-    data && fetch('https://dukaan--app.herokuapp.com' +url, {
+    data && fetch(process.env.REACT_APP_API_URL +url, {
       credentials: "include",
       method: "post",
       body: JSON.stringify(data),
