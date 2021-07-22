@@ -20,7 +20,7 @@ function App() {
 
   useEffect(()=>{
       var data = {}
-        UseDataBase(data,'https://http://localhost:5000'+'/isLogin',(dataSet)=>{
+        UseDataBase(data,'/isLogin',(dataSet)=>{
           if(dataSet){
             setUserData(dataSet[0])
             setAuth(true);
