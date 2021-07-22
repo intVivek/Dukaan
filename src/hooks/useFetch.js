@@ -13,17 +13,18 @@ const useFetch=(data,url)=> {
     fetch(url, {
       credentials: "include",
       method: "post",
-      mode: 'cors',
       body: JSON.stringify(data),
-      headers: { "Content-type": "application/json; charset=UTF-8" }
+      headers: { "Content-type": "application/json" }
     }).then(function (response) {
       return response.json(data);
     }).then(function (data) {
       setProducts((oldProducts) => [...oldProducts, ...data]);
       data.length&&setHasMore(true);
       setIsLoading(false);
-    })
-      setError(false);
+    }).catch((error) => {
+      console.error(error);
+      setError(true)
+    });
   }, [data,url]);
 
   return { isLoading, error, products, hasMore };
