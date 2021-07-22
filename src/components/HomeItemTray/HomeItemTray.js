@@ -12,11 +12,11 @@ const HomeItemTray = props=>{
   return(
     <div onClick={()=>window.open("/product?id="+props.product.id, '_blank')} className='CardItemBox'>
       <div className='CardItemBoxContainer'>
-        <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' alt='img' src={img}/></div>
+        <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' alt='img' src={'https://images.weserv.nl/?url='+img}/></div>
         <div className='CardItemBoxName'>{addThreeDots(props.product.product_name,70)}</div>
         <div className='CardItemBoxRating'>
          <div className ="CardRating">{props.product.product_rating}★</div>
-         {props.product.assured==='true'?<img className="assuredIMG" src ={'https://images.weserv.nl/?url='+icon} alt='assured'></img>:""}
+         {props.product.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}
         </div>
         <div className='CardItemBoxPrice'>
           <div className='cardItemPrice'>
