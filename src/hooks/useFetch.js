@@ -14,7 +14,7 @@ const useFetch=(data,url)=> {
       credentials: "include",
       method: "post",
       body: JSON.stringify(data),
-      headers: {}
+      headers: { "Content-type": "application/json" }
     }).then(function (response) {
       return response.json(data);
     }).then(function (data) {
