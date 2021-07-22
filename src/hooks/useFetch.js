@@ -25,6 +25,7 @@ const useFetch=(data,url)=> {
       console.error(error);
       setError(true)
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.pageNum]);
 
   return { isLoading, error, products, hasMore };
