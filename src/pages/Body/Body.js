@@ -27,7 +27,6 @@ const Body = props =>{
   filterBrand = query.getAll('filterBrand');
 
   useEffect(()=>{
-
     const url = 'https://dukaan--app.herokuapp.com/product';
     var data = {
         search,
@@ -44,7 +43,9 @@ const Body = props =>{
       top: 0,
       behavior: 'smooth',
     })
+    // eslint-disable-next-line
   },[props.reload]);
+  //props.reload, filterBrand, filterRating, isAssured, maxPrice, minPrice, page, props.setLoading, search, sort
   
   const tray = productData[0]&&productData[0].map((data, index) =>
       <ProductTray  key={index} data={data}></ProductTray>
