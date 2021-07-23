@@ -9,7 +9,6 @@ import React from 'react';
 const Header = (props) =>{
   let history = useHistory();
   const page = useParams().page;
-  console.log('header-param',page);
   return(
   <div className='header'>
     <h3 onClick={()=>{page && history.push('')}}>DUKAAN</h3>

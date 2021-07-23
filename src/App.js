@@ -29,13 +29,10 @@ function App() {
   },[]);
 
    useEffect(() => {
-    console.log(login);
     if (login) document.querySelector('.App').style.overflow='hidden';
     else document.querySelector('.App').style.overflow='auto';
   }, [login]);
 
-
-console.log('path', path);
   var page;
   switch(path){
     case ''        : page = <Home setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;

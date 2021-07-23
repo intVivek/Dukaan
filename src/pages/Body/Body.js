@@ -8,7 +8,9 @@ import Pagination from '@material-ui/lab/Pagination';
 import BodyLoading from './BodyLoading.js';
 import {UseDataBase} from "../../utils/UseDataBase.js";
 import ErrorPage from '../ErrorPage/ErrorPage.js';
-import noResultFound from './noResultFound.png';
+import LottieNotFound from '../../components/LottiePlayer/NotFound.json';
+import LottiePlayer from '../../components/LottiePlayer/LottiePlayer.jsx';
+
 
 const Body = props =>{
   var location = useLocation();
@@ -45,7 +47,6 @@ const Body = props =>{
     })
     // eslint-disable-next-line
   },[props.reload]);
-  //props.reload, filterBrand, filterRating, isAssured, maxPrice, minPrice, page, props.setLoading, search, sort
   
   const tray = productData[0]&&productData[0].map((data, index) =>
       <ProductTray  key={index} data={data}></ProductTray>
@@ -69,7 +70,7 @@ const Body = props =>{
     props.setReload(!props.reload);
   };
   const zero = <div className="bodyNoResult">
-  <img src={noResultFound} alt=''/>
+  <LottiePlayer className='loader' animationData={LottieNotFound} />
   <span>Sorry, no results found!</span>
   <p>Please check the spelling or try searching for something else</p>
 </div>

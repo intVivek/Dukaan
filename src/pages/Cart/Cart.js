@@ -53,7 +53,6 @@ const Cart = props =>{
   },[props]);
 
   useEffect(() => {
-    console.log('empty',empty);
   },[empty]);
 
   const order =()=>{

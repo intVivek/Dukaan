@@ -47,7 +47,7 @@
   justify-content : center;
   border-bottom:1px solid #f0f0f0;
   border-right:1px solid #f0f0f0;
- 
+  cursor: pointer;
   margin-right:1px;
 }
 .productPageImageTray:hover{

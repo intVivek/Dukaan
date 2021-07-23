@@ -6,7 +6,6 @@ import { useHistory,useLocation } from "react-router-dom";
 import {UseDataBase} from "../../utils/UseDataBase.js";
 import ProductPageLoading from './ProductPageLoading.js';
 import ErrorPage from '../ErrorPage/ErrorPage.js';
-import EmptyPage from '../EmptyPage/EmptyPage.js';
 import buttonLoadingImg from '../../buttonLoading.svg';
 
 const ProductPage = props => {
@@ -28,7 +27,6 @@ const ProductPage = props => {
   },[productId]);
  
   var x=products[1];
-  console.log(products[0]);
   const imageTray = x && x.map((data, index) =>
     <div key={index} onClick={() => { setDisplayImg(index) }} className="productPageImageTray"><img alt="" src={'https://dukaan--app.herokuapp.com/image?url='+data.url} /></div>
   );
@@ -50,7 +48,6 @@ const ProductPage = props => {
       var data = {
         user_id: props.userData.id,
         product_id:products[0]&&products[0].id,
-        quantity:1
       }
       props.userData.id && UseDataBase(data,'/addToCart',(dataSet)=>{
         if(dataSet.status===0)
@@ -87,7 +84,7 @@ const ProductPage = props => {
   }
 
   return (
-    error?<ErrorPage/>:empty?<EmptyPage name={'Product not Found'}/>:loading?<ProductPageLoading/>:
+    error?<ErrorPage/>:loading?<ProductPageLoading/>:
     <div className="productPage">
       <div className="productPageMain">
         <div className="productPageImageMain">

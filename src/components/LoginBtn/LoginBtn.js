@@ -22,9 +22,7 @@ const logOutHandler=()=>{
   setButtonLoading(true);
   var data = {}
   UseDataBase(data,'/logout',(dataSet)=>{
-    console.log(dataSet);
     if(dataSet?.status===0){
-      console.log('user',props.userData);
       props.setAuth(false);
       setMenu(false);
       history.push("/home");
@@ -37,7 +35,6 @@ const logOutHandler=()=>{
   },setButtonLoading,setError);
 }
 const openOrderHandler=()=>{
-  console.log('page',page)
   if(page!=='orders'){
     setMenu(!menu);
     history.push("/orders");

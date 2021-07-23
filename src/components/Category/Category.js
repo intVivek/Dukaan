@@ -6,7 +6,6 @@ const Category = props =>{
   const query = new URLSearchParams(location.search);
   const clickHandler = (q) =>{
     if(query.get('q')!==q){
-      console.log(props);
       props.setLoading(true);
       history.push('/search?q='+q+'&page=1&sort=popularity');
       props.setReload(!props.reload);

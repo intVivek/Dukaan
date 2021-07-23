@@ -37,7 +37,6 @@ const LoginPage = props =>{
         password   
       }
       UseDataBase(data,'/login',(dataSet)=>{
-        console.log(dataSet);
         if(dataSet?.[0]?.status===0){
           props.setAuth(true);
           props.setLogin(!props.login);
@@ -86,7 +85,6 @@ const LoginPage = props =>{
         cpass
       }
       UseDataBase(data,'/register',(dataSet)=>{
-        console.log(dataSet)
         if(dataSet.status===0){
           setReg(!reg);
           notification(dataSet?.message,'success');
