@@ -12,7 +12,6 @@ const ProductPage = props => {
   const [products,setProducts]=useState([]);
   const [loading,setLoading] = useState(true);
   const [error,setError]=useState(false);
-  const [empty,setEmpty]=useState(false);
   const [cartButtonLoading,setCartButtonLoading]=useState(false);
   const [BuyButtonLoading,setBuyButtonLoading]=useState(false);
   var location = useLocation();
@@ -23,7 +22,7 @@ const ProductPage = props => {
   const productId = query.get('id');
 
   useEffect(()=>{
-    productId && UseDataBase({product_id: productId},'/openProduct',setProducts,setLoading,setError,setEmpty);
+    productId && UseDataBase({product_id: productId},'/openProduct',setProducts,setLoading,setError);
   },[productId]);
  
   var x=products[1];
