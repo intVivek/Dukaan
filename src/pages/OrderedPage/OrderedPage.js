@@ -4,7 +4,8 @@ import { useState ,useEffect} from "react";
 import {UseDataBase} from "../../utils/UseDataBase.js";
 import ErrorPage from '../ErrorPage/ErrorPage.js';
 import EmptyPage from '../EmptyPage/EmptyPage.js';
-import loadingImg from './loading.svg';
+import LottieLoading from '../../components/LottiePlayer/OrderLoading.json';
+import LottiePlayer from '../../components/LottiePlayer/LottiePlayer.jsx';
 const OrderedPage=props=>{
 
 
@@ -26,7 +27,7 @@ const OrderedPage=props=>{
     <OrderedItemTray key={index} data={data}/>
   );
   return(
-    error?<ErrorPage/>:empty?<EmptyPage name={'No Orders Yet'}/>:loading?<div className='orderedLoading'><img src ={loadingImg} alt=''/><span>Loading Orders</span></div>:
+    error?<ErrorPage/>:empty?<EmptyPage name={'No Orders Yet'}/>:loading?<div className="homeLoading"><LottiePlayer className='loader' animationData={LottieLoading} /><span>Loading ...</span></div>:
     <div className="backgroundColor">
       <div className="OrderedPageMain">
       <div  className="OrderedPageContainer">

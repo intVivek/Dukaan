@@ -46,9 +46,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
   color: #212121;
-    line-height: 22px;
+  line-height: 22px;
 }
 
 .productName{

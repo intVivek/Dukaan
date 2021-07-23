@@ -30,6 +30,9 @@
     align-items : center;
     justify-content : center;
 }
+.cartItemTrayUpper:hover .cartItemName{
+    color : #2874f0;
+}
 .cartItemTrayUpperLeft>img{
     max-width: 90%;
     max-height: 90%
@@ -80,6 +83,10 @@
     font-size: 16px;
     border-radius: 50%;
     line-height: 1;
+    transition: all .2s ease-in-out;
+}
+.cartItemTrayLowerLeft>button:active{
+    transform: scale(1.1);
 }
 
 .cartItemTrayLowerRight{

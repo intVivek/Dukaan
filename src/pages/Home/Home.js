@@ -3,9 +3,10 @@ import useFetch from "../../hooks/useFetch";
 import HomeItemTray from '../../components/HomeItemTray/HomeItemTray.js';
 import './Home.css';
 import Category from '../../components/Category/Category.js';
-import loadingImg from './loading.svg';
+import LottieLoading from '../../components/LottiePlayer/HomeLoading.json';
 import ErrorPage from '../ErrorPage/ErrorPage.js';
 import loadingBottom from './loadingBottom.svg';
+import LottiePlayer from '../../components/LottiePlayer/LottiePlayer.jsx';
 
 export default function Home(props) {
   
@@ -29,7 +30,7 @@ export default function Home(props) {
     <HomeItemTray key={index} product={product}/>
   );
   return (
-    error?<ErrorPage/>:isLoading&&pageNum===1?<div className="homeLoading"><img src={loadingImg} alt=''/></div>:
+    error?<ErrorPage/>:isLoading&&pageNum===1?<div className="homeLoading"><LottiePlayer className='loader' animationData={LottieLoading} /><span>Loading ...</span></div>:
       <div  className="homePageMain">
       <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
       <div className="homePage">

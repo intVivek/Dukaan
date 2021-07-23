@@ -18,11 +18,18 @@
   z-index: 10;
   background-color: #fff;
   display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-.homeLoading>img{
-  margin:auto;
-  max-width: 80px;
-  max-height: 80px;
+.homeLoading>.loader{
+  margin-right:70px;
+  max-width: 100px;
+  max-height: 100px;
+}
+.homeLoading>span{
+  margin-top:80px;
+  margin-bottom:150px;
 }
 .homeBottomLoading{
   width:100%;
