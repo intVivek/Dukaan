@@ -7,7 +7,7 @@ const EmptyPage = (props) =>{
   return(
     <div className="emptyPage">
       <LottiePlayer className='loader' animationData={LottieEmpty} />
-      <span className="emptyPageName">Nothing can be found here</span>
+      <span className="emptyPageName">{props.name}</span>
     </div>
   );
 }
