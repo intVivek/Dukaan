@@ -58,7 +58,7 @@ const Cart = props =>{
 
   const order =()=>{
     setButtonLoading(true);
-    const url = 'cartOrderAll';
+    const url = '/cartOrderAll';
     var data = {
       user_id: props.userData.id
     }
