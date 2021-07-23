@@ -202,12 +202,14 @@
 }
 .productAddToCartBtn{
   background-color:#ff9f00;
+  cursor: pointer;
 }
 .productbuyBtn{
   background-color:#fb641b;
   display : flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .productbuyBtn>div{
   background-repeat: no-repeat;
