@@ -279,5 +279,17 @@
   .productPageBuyButtons{
     position: fixed;
     bottom:0;
+    height:45px;
+    box-shadow: rgb(0 0 0 / 15%) 0px -1px 3px 0px;
+  }
+  .productPageBuyButtons>button{
+    height:45px;
+    width:50%;
+    border-radius:0px;
+    font-weight: 500;
+  }
+  .productAddToCartBtn{
+    background-color:#fff;
+    color:black!important;
   }
 }

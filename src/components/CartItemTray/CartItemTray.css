@@ -139,6 +139,7 @@
   @media only screen and (max-width: 500px) {
     .cartItemName {
         width:80%;
+        font-size:12px;
     }
     .cartItemTrayLowerRight>button {
         font-size:12px;

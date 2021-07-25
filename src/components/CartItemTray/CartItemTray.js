@@ -1,14 +1,27 @@
 import './CartItemTray.css';
+import {addThreeDots} from "../../utils/addThreeDots.js";
+import { useHistory } from "react-router-dom";
+
 const CartItemTray = props => {
   const {url: img, discounted_price, retail_price,product_name,quantity,product_id,cart_id} = props?.data || {};
   const discount = Math.floor(((retail_price - discounted_price) * 100 / retail_price));
+  let history = useHistory();
+  const openProductHandler=()=>{
+    if(window.innerWidth>500){
+      window.open("/product?id="+product_id, '_blank');
+    }
+    else{
+      history.push("/product?id="+product_id);
+    }
+    window.scrollTo({top: 0});
+  }
 
   return (
     <div className="cartItemTray">
-      <div onClick={()=>window.open("/product?id="+props.data.product_id, '_blank')} className="cartItemTrayUpper">
+      <div onClick={openProductHandler} className="cartItemTrayUpper">
         <div className="cartItemTrayUpperLeft"><img src={img&&('https://dukaan--app.herokuapp.com/image?url='+img)} alt='Product' /></div>
         <div className="cartItemTrayUpperRight">
-          <div className="cartItemName">{product_name}</div>
+          <div className="cartItemName">{addThreeDots(product_name,50)}</div>
           <div className='cartItemPrice'>
             <div className='cartItemDiscountedPrice'>₹{discounted_price && discounted_price.toLocaleString()}</div>
             <div className='cartItemActualPrice'>₹{retail_price && retail_price.toLocaleString()}</div>

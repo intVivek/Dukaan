@@ -140,6 +140,7 @@
   .productName {
     margin-left:15px;
     width:auto;
+    font-size:12px;
   }
   .productTrayPrice {
     display: flex;
