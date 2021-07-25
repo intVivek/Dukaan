@@ -38,7 +38,9 @@
   display: block;
   transition: 0.3s;
   border:none;
+  width:100%;
   background-color :#fff;
+  display:flex;
 }
 
 .sidenav button:hover {
@@ -47,10 +49,11 @@
 
 .sidenav .sideNavClose {
   position:absolute;
-  top: 25px;
+  top: 0px;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  color: #818181;
 }
 .sideNavOpen{
   width:25px;
