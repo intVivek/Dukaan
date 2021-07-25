@@ -134,7 +134,7 @@ const LoginPage = props =>{
       </div>
     </div>:
             <div className='loginInput'>
-              <a onClick={()=>props.setLogin(!props.login)} className="loginCloseMobile" >&times;</a>
+              <button onClick={()=>props.setLogin(!props.login)} className="loginCloseMobile" >&times;</button>
               {!reg?<div id = 'loginInputSection1' className="loginInputSection"></div>:""}
               <div id = 'loginInputSection2' className="loginInputSection">{!reg?<TextField key={1} setValue={setEmail} placeHolder='Enter Email'/>:<TextField setValue={setName} placeHolder='User Name'/>}</div>
               <div id = 'loginInputSection3' className="loginInputSection">{!reg?<TextField key={2} setValue={setPassword} placeHolder='Enter Password'/>:<TextField key={1} setValue={setEmail} placeHolder='Enter Email'/>}</div>
