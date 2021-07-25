@@ -152,12 +152,12 @@
   .filterSort{
     position:fixed;
     width:100%;
-    height:30px;
+    height:40px;
     z-index: 0;
     background-color:rgb(219, 219, 219);
   }
   .productSortTop {
-    margin-top:30px;
+    margin-top:40px;
     display:flex;
   }
   .filterSort>button{

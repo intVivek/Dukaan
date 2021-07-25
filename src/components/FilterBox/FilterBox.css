@@ -156,6 +156,10 @@
     margin-right:5px;
     position: absolute;
     right: 0;
+    text-decoration: none;
+    color: #818181;
+    border:none;
+    background-color :#fff;
   }
   .filterBoxName {
     justify-content:flex-start;

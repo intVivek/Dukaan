@@ -36,7 +36,7 @@ function App() {
   var page;
   switch(path){
     case ''        : page = <Home setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
-    case 'product' : page = <ProductPage auth={auth} login={login} setLogin={setLogin} userData={userData}/>;break;
+    case 'product' : page = <ProductPage setBodyLoading={setBodyLoading} auth={auth} login={login} setLogin={setLogin} userData={userData}/>;break;
     case 'search'  : page = <Body loading={bodyLoading} setLoading={setBodyLoading} reload={reload} setReload={setReload}/>;break;
     case 'cart'    : page = <Cart userData={userData} />;break;
     case 'orders'  : page = <OrderedPage userData={userData}/>;break;

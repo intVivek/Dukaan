@@ -21,7 +21,7 @@ const ProductPage = props => {
   const [displayImg, setDisplayImg] = useState(0);
   
   const productId = query.get('id');
-
+  props.setBodyLoading(true);
   useEffect(()=>{
     productId && UseDataBase({product_id: productId},'/openProduct',setProducts,setLoading,setError);
   },[productId]);

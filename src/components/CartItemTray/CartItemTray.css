@@ -139,7 +139,7 @@
   @media only screen and (max-width: 500px) {
     .cartItemName {
         width:80%;
-        font-size:12px;
+        font-size:14px;
     }
     .cartItemTrayLowerRight>button {
         font-size:12px;
@@ -147,5 +147,14 @@
     .cartItemTrayUpperLeft>img{
         max-width: 70%;
         max-height: 70%
+    }
+    .cartItemDiscountedPrice{
+        font-size:12px;
+    }
+    .cartItemActualPrice{
+        font-size:12px;
+    }
+    .cartItemDiscount {
+        font-size:12px;
     }
   }

@@ -63,4 +63,14 @@
   .productSortBottom>button.active {
     border:none;
   }
+  .sortBoxCloseMobile{
+    font-size: 26px;
+    margin:5px 15px 0px 0px;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    color: #818181;
+    border:none;
+    background-color :#fff;
+  }
 }

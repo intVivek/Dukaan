@@ -106,7 +106,7 @@
   .cardItemDiscountedPrice{
     font-size:12px;
     font-weight: 500;
-    margin-left:5px;
+    margin-left:10px;
   }
   .cardItemActualPrice{
     font-size: 10px;
@@ -123,7 +123,7 @@
   .CardItemBoxName{
     font-size: 12px;
     height:30px;
-    margin-left:5px;
+    margin-left:10px;
     width:95%;
   }
 }

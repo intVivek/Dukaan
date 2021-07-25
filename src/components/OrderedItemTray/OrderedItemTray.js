@@ -22,9 +22,9 @@ const OrderedItemTray =props=>{
   return(
     <div onClick={openProductHandler} className="OrderedTray">
         <div className="OrderedTrayImage"><img src={'https://dukaan--app.herokuapp.com/image?url='+img} alt='Product'/></div>
-          <div className ="OrderedName"><span>{addThreeDots(props.data.product_name,40)}</span><p>{props.data.quantity>1&&('x'+props.data.quantity)}</p></div>
+          <div className ="OrderedName"><span>{addThreeDots(props.data.product_name,60)}</span></div>
         <div className = "OrderedPrice">
-          <div><span>₹{props.data.price.toLocaleString()}</span></div>
+          <span>₹{props.data.price.toLocaleString()}</span><p>{props.data.quantity>1&&('x'+props.data.quantity)}</p>
         </div>
         <div className = "OrderedTrayInfo">
           <div className = "OrderedTrayInfoOrdered">

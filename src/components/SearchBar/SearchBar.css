@@ -41,4 +41,15 @@
     width:95%;
     margin:5px;
   }
+  .searchTerm{
+    height:15px;
+  }
+  .searchButton {
+    height:31px;
+  }
+  .searchButton >img {
+    margin-top: 2px;
+    max-width: 22px;
+    max-height: 22px;
+}
 }

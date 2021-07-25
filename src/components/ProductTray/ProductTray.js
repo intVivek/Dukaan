@@ -36,7 +36,7 @@ const ProductTray = props=>{
           <ul>
             {spec[0]&&spec[0].length<50?<li>{spec[0]}</li>:''}
             {spec[1]&&spec[1].length<50?<li>{spec[1]}</li>:''}
-            {window.innerWidth>500&&spec[2]&&spec[2].length<50?<li>{spec[2]}</li>:''}
+            {spec[2]&&spec[2].length<50?<li>{spec[2]}</li>:''}
             {window.innerWidth>500&&spec[3]&&spec[3].length<50?<li>{spec[3]}</li>:''}
             {window.innerWidth>500&&spec[4]&&spec[4].length<50?<li>{spec[4]}</li>:''}
           </ul>

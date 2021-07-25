@@ -105,21 +105,36 @@
   .OrderedName {
     width: calc(100% - 160px);
     margin-left: 120px;
-    font-size: 12px;
+    font-size: 14px;
+    margin-top:12px;
+    height:fit-content;
   }
   .OrderedPrice {
     margin-left: 120px;
+    margin-top:10px;
+    width: auto;
+    height:40px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .OrderedPrice> p{
+    margin-right:35px;
+    font-size:12px;
+  }.OrderedPrice> span{
+    font-size:12px;
   }
   .OrderedTrayInfo {
-    width: calc(100% - 160px);;
-    height: 100px;
+    width: calc(100% - 160px);
+    height: 40px;
     margin-left: 120px;
     flex-direction: row;
     font-size: 12px;
     justify-content: space-between;
+    margin-top:12px;
   }
   .OrderedTrayImage>img {
     max-width: 80px;
     max-height: 80px;
-}
+  }
 }

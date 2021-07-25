@@ -4,30 +4,57 @@ import LoadingBox from '../../components/LoadingBox/LoadingBox.js'
 const CartLoading = () =>{
 
   return(
-        <div className='cartLoadingContainer'>
-          <div className="cartLoadingTray">
-            <div className="cartLoadingImage">
-              <LoadingBox width={'120px'} height={'120px'}/>
-            </div>
-            <div className="cartLoadingSpec">
-              <LoadingBox width={'400px'} height={'25px'}/>
-              <div className="cartLoadingSpecList">
-                <LoadingBox width={'220px'} height={'20px'}/>
-              </div>
-            </div>
-          </div>
-          <div className="cartLoadingTray">
-            <div className="cartLoadingImage">
-              <LoadingBox width={'120px'} height={'120px'}/>
-            </div>
-            <div className="cartLoadingSpec">
-              <LoadingBox width={'400px'} height={'25px'}/>
-              <div className="cartLoadingSpecList">
-                <LoadingBox width={'220px'} height={'20px'}/>
-              </div>
-            </div>
-          </div>
+    <div className='bodyLoadingContainer'>
+    <div className="bodyLoadingTray">
+    <div className="bodyLoadingImage">
+      <LoadingBox width={'100px'} height={'100px'}/>
+      </div>
+      <div className="bodyLoadingSpec">
+        <LoadingBox width={'180px'} height={'20px'}/>
+        <div className="bodyLoadingSpecList">
+          <LoadingBox width={'50px'} height={'10px'}/>
+          <LoadingBox width={'50px'} height={'10px'}/>
         </div>
+      </div>
+    </div>
+    <div className="bodyLoadingTray">
+    <div className="bodyLoadingImage">
+      <LoadingBox width={'100px'} height={'100px'}/>
+      </div>
+      <div className="bodyLoadingSpec">
+        <LoadingBox width={'180px'} height={'20px'}/>
+        <div className="bodyLoadingSpecList">
+          <LoadingBox width={'50px'} height={'10px'}/>
+          <LoadingBox width={'50px'} height={'10px'}/>
+        </div>
+      </div>
+    </div>
+    <div className="bodyLoadingTray">
+    <div className="bodyLoadingImage">
+      <LoadingBox width={'100px'} height={'100px'}/>
+      </div>
+      <div className="bodyLoadingSpec">
+        <LoadingBox width={'180px'} height={'20px'}/>
+        <div className="bodyLoadingSpecList">
+          <LoadingBox width={'50px'} height={'10px'}/>
+          <LoadingBox width={'50px'} height={'10px'}/>
+        </div>
+      </div>
+    </div>
+    <div className="bodyLoadingTray">
+    <div className="bodyLoadingImage">
+      <LoadingBox width={'100px'} height={'100px'}/>
+      </div>
+      <div className="bodyLoadingSpec">
+        <LoadingBox width={'180px'} height={'20px'}/>
+        <div className="bodyLoadingSpecList">
+          <LoadingBox width={'50px'} height={'10px'}/>
+          <LoadingBox width={'50px'} height={'10px'}/>
+        </div>
+      </div>
+    </div>
+
+  </div>
   );
 }
 
