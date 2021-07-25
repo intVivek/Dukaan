@@ -8,7 +8,7 @@ const SideMenu = (props) =>{
   return(
     <>{props?.open?
       <div className="sidenav">
-        <a onClick={clickHandler} className="sideNavClose" >&times;</a>
+        <button onClick={clickHandler} className="sideNavClose" >&times;</button>
         <span>{"Hello, "+props.userData.name}</span>
         <button onClick={props.openHomeHandler}>Home</button>
         <button onClick={props.openOrderHandler}>Orders</button>

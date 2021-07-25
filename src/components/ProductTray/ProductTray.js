@@ -18,7 +18,7 @@ const ProductTray = props=>{
           <div className ="productName"><span>{props.data.product_name}</span></div>
           <div className='bodyratingPrice'><div className ="productRating">{props.data.product_rating}★</div>{window.innerWidth<500&&<div className = "productTrayPrice">
           <div><span>₹{dp.toLocaleString()}</span></div>
-          <div>{rp>dp?<><p>₹{rp.toLocaleString()}</p><h4>{discount}%OFF</h4></>:""}{props.data.assured==1?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>  
+          <div>{rp>dp?<><p>₹{rp.toLocaleString()}</p><h4>{discount}%OFF</h4></>:""}{props.data.assured===""+1?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>  
         </div>}</div>
         
           <ul>
@@ -30,7 +30,7 @@ const ProductTray = props=>{
           </ul>
         </div>
         {window.innerWidth>500&&<div className = "productTrayPrice">
-          <div><span>₹{dp.toLocaleString()}</span>{props.data.assured==1?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
+          <div><span>₹{dp.toLocaleString()}</span>{props.data.assured===""+1?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}</div>
           <div>{rp>dp?<><p>₹{rp.toLocaleString()}</p><h4>{discount}%OFF</h4></>:""}</div>  
         </div> }
       </div>

@@ -91,7 +91,7 @@ console.log(props.auth);
   </div>:
   <div className='header'>
     <div className='headerMobile'>
-      {props.auth?<SideMenu open={openNav} setOpen={setOpenNav} login = {props.login} setLogin = {props.setLogin} auth={props.auth} userData={props.userData} buttonLoading={buttonLoading} auth={props.auth} userData={props.userData} openOrderHandler={openOrderHandler} logOutHandler={logOutHandler} clickHandler={clickHandler} openCartHandler={openCartHandler} openHomeHandler={openHomeHandler}/>:<div className='sideMenuFiller'></div>}
+      {props.auth?<SideMenu open={openNav} setOpen={setOpenNav} login = {props.login} setLogin = {props.setLogin} auth={props.auth} userData={props.userData} buttonLoading={buttonLoading} openOrderHandler={openOrderHandler} logOutHandler={logOutHandler} clickHandler={clickHandler} openCartHandler={openCartHandler} openHomeHandler={openHomeHandler}/>:<div className='sideMenuFiller'></div>}
       <div className='headerMobileName'>
       <h3 onClick={()=>{page && history.push('')}}>DUKAAN</h3>
       {props.auth?

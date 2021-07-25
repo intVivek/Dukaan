@@ -5,7 +5,7 @@ const SortBox = props =>{
   return(
     <div className='productSortBottom'>
     <span>Sort By</span>
-    {window.innerWidth<=500 &&<a onClick={()=>props.setSortBox(!props.sortBox)} className="filterBoxCloseMobile" >&times;</a>}
+    {window.innerWidth<=500 &&<button onClick={()=>props.setSortBox(!props.sortBox)} className="filterBoxCloseMobile" >&times;</button>}
     <button className={props.getClassName('popularity')} onClick={()=>props.sortHandler('popularity')}>Popularity</button>
     <button className={props.getClassName('product_rating DESC')} onClick={()=>props.sortHandler('product_rating DESC')}>Rating</button>
     <button className={props.getClassName('discounted_price ASC')} onClick={()=>props.sortHandler('discounted_price ASC')}>Price -- Low to High</button>

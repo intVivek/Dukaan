@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import useFetch from "../../hooks/useFetch";
 import HomeItemTray from '../../components/HomeItemTray/HomeItemTray.js';
 import './Home.css';
-import Category from '../../components/Category/Category.js';
+// import Category from '../../components/Category/Category.js';
 import LottieLoading from '../../components/LottiePlayer/HomeLoading.json';
 import ErrorPage from '../ErrorPage/ErrorPage.js';
 import loadingBottom from './loadingBottom.svg';
