@@ -8,8 +8,6 @@
 .header{
   width : 100%;
   height : 40px;
-}::-webkit-scrollbar {
-  width: 5px;
 }
 
 ::-webkit-scrollbar-track {

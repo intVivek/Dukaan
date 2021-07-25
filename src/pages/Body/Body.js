@@ -2,6 +2,7 @@ import './Body.css';
 import {useState,useEffect} from 'react';
 import ProductTray from '../../components/ProductTray/ProductTray.js';
 import FilterBox from '../../components/FilterBox/FilterBox.js';
+import SortBox from '../../components/SortBox/SortBox.js';
 import Category from '../../components/Category/Category.js';
 import { useHistory,useLocation } from "react-router-dom";
 import Pagination from '@material-ui/lab/Pagination';
@@ -18,6 +19,8 @@ const Body = props =>{
   const query = new URLSearchParams(location.search);
   const [productData,setProductData] = useState([]);
   const [error,setError]=useState(false);
+  const [sortBox,setSortBox]=useState(false);
+  const [filterBox,setFilterBox]=useState(false);
 
   var search  = query.get('q'),
   page        = query.get('page'),
@@ -74,29 +77,35 @@ const Body = props =>{
   <span>Sorry, no results found!</span>
   <p>Please check the spelling or try searching for something else</p>
 </div>
-
+const sortBtnHandler=()=>{
+  setSortBox(!sortBox);
+}
+const filterBtnHandler=()=>{
+  setFilterBox(!filterBox);
+}
   return(
     error?<ErrorPage/>:
     <div className = 'MainBody'>
-      <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
+      {window.innerWidth>500 && <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>}
       <div className="BodyDisplay">
-        <div className="BodyDisplayGap"></div>
-        <FilterBox reload={props.reload} setLoading={props.setLoading} setReload={props.setReload} brand={productData[2]}/>
+      {window.innerWidth>500?<><div className="BodyDisplayGap"></div>
+        <FilterBox filterBox={filterBox }setFilterBox={setFilterBox} reload={props.reload} setLoading={props.setLoading} setReload={props.setReload} brand={productData[2]}/></>:""}
+        {filterBox&&<FilterBox filterBox={filterBox }setFilterBox={setFilterBox} reload={props.reload} setLoading={props.setLoading} setReload={props.setReload} brand={productData[2]}/>}
+        {sortBox&&<div className='SortBoxMobile'><SortBox sortBox={sortBox} setSortBox={setSortBox} sortHandler={sortHandler} getClassName={getClassName}/><div onClick={()=>setSortBox(!sortBox)} className="sortBottomClose"></div></div>}
         <div className="itemBox">
+        {window.innerWidth>500?
           <div className='productSort'>
           <div className='productSortTop'><span>{search?search:"All Products"}</span>{!props.loading&&tray?.length>0?<p>({s})</p>:""}</div>
-          <div className='productSortBottom'>
-            <span>Sort By</span>
-            <button className={getClassName('popularity')} onClick={()=>sortHandler('popularity')}>Popularity</button>
-            <button className={getClassName('product_rating DESC')} onClick={()=>sortHandler('product_rating DESC')}>Rating</button>
-            <button className={getClassName('discounted_price ASC')} onClick={()=>sortHandler('discounted_price ASC')}>Price -- Low to High</button>
-            <button className={getClassName('discounted_price DESC')} onClick={()=>sortHandler('discounted_price DESC')}>Price -- High to Low</button>
-          </div>
-          </div>
+          {window.innerWidth>500 && <SortBox sortHandler={sortHandler} getClassName={getClassName}/>}
+          </div>:<>
+            <div className="filterSort"><button onClick={sortBtnHandler} className="sortOpenBtn">Sort</button><button onClick={filterBtnHandler} className="filterOpenBtn">filter</button></div>
+            <div className='productSortTop'><span>{search?search:"All Products"}</span>{!props.loading&&tray?.length>0?<p>({s})</p>:""}</div>
+          </>}
           {props.loading?<BodyLoading/>:tray?.length===0?zero:tray}
-          <div className ='bodyPagesChange'>
-          {productData?.[1]?.[0].count?<Pagination count={Math.ceil(parseInt(productData[1][0].count)/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>:''}
-          </div>
+          {!props.loading&&productData?.[1]?.[0].count?
+          <><div className ='bodyPagesChange'></div>
+          <div className='pagination'><Pagination count={Math.ceil(parseInt(productData[1][0].count)/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>
+          </div></>:""}
         </div>
       </div>
     </div>

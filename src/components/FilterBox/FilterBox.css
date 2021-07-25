@@ -2,7 +2,6 @@
   position : fixed;
   width : 280px;
   height : 500px;
-  background-color : #fff;
   left : 10px;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
 }
@@ -13,6 +12,7 @@
   display: flex;
   align-items: center;
   justify-content:space-between;
+  background-color: #fff;
 }
 .filterBoxName>span{
   font-size : 18px;
@@ -32,6 +32,7 @@
   justify-content: space-around;
   flex-direction: column;
   width : 100%;
+  background-color: #fff;
   height : 80px;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -66,6 +67,7 @@
 .filterBoxAssure{
   width : 100%;
   height : 45px;
+  background-color: #fff;
   display:flex;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
@@ -86,6 +88,7 @@
   width : 100%;
   height: 130px;
   border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
   display : flex;
   flex-direction: column;
   justify-content: center;
@@ -112,12 +115,14 @@
   width : 100%;
   height: 155px;
   overflow : auto;
+  background-color: #fff;
 }
 .filterBoxBrandName{
   height : 35px;
   display : flex;
   align-items : center;
   margin-left : 15px;
+  background-color: #fff;
 }
 .filterBoxBrandName>span{
   font-size : 15px;
@@ -128,4 +133,34 @@
 }
 .filterBoxBrand>div>span{
   margin-left : 15px;
+}
+.filterSortBoxItems{
+  background-color:#fff;
+}
+@media only screen and (max-width: 500px) {
+  .filterBox{
+    position : fixed;
+    width : 100%;
+    height:100%;
+    left:0;
+    z-index: 1;
+  }
+  .filterBottomClose{
+    width : 100% ;
+    height : calc(100% - 495px);
+    background-color: rgba(175, 175, 175, 0.048);
+    border-top: 1px solid #dddddd;
+  }
+  .filterBoxCloseMobile{
+    font-size: 26px;
+    margin-right:5px;
+    position: absolute;
+    right: 0;
+  }
+  .filterBoxName {
+    justify-content:flex-start;
+  }
+  .filterBoxName>p {
+    margin:2px 0 0 15px;
+  }
 }

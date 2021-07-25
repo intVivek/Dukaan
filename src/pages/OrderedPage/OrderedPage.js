@@ -22,7 +22,6 @@ const OrderedPage=props=>{
       props.userData.id && UseDataBase(data,url,setProductData,setLoading,setError,setEmpty);
     },[props]);
 
-  
   const tray = productData&&productData.map((data, index) =>
     <OrderedItemTray key={index} data={data}/>
   );

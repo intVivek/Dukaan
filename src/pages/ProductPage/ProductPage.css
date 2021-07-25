@@ -185,6 +185,7 @@
   line-height: 1.5em;
 }
 .productPageBuyButtons{
+  background-color:#fff;
   width : 100%;
   height : 65px;
   display:flex;
@@ -216,4 +217,67 @@
   width:15px;
   height:20px;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMHY3LjdoMi4xVjE0TDcgNS42SDQuMkw3IDAiIGZpbGw9IiNGRkYiLz48L3N2Zz4=);
+}
+@media only screen and (max-width: 500px) {
+  .productPage {
+    margin-top:80px;
+  }
+  .productPageMain {
+    width: 100%;
+    top: 80px;
+    flex-direction: column;
+    overflow-x: hidden;
+    padding-bottom: 65px;
+  }
+  .productPageAboutName {
+    width: 95%;
+    font-size: 16px;
+    margin-left:15px;
+  }
+  .productPageAbout {
+    width: 100%;
+  }
+  .productRating {
+    margin-left: 15px;
+  }
+  .ProductPagePrice {
+    margin-left: 15px;
+    width:90%;
+  }
+  .productPageSpecList {
+    width: 100%;
+    margin:0;
+    border: 1px solid #f0f0f0;
+  }
+  .productPageSpecListItems {
+    margin: 25px 25px 0 0;
+  }
+  .productPageSpecKey {
+    width: 20%;
+    margin-left: 15px;
+  }
+  .productPageSpecName>span {
+    margin-left: 15px;
+  }
+  .productPageDescription {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+  .productPageDescriptionName {
+    margin-left: 15px;
+  }
+  .productPageDescriptionValue {
+    width: 65%;
+  }
+  .productPageSpecValue {
+    width: 65%;
+    height: auto;
+    margin-left: 30px;
+    line-height: 1.5em;
+  }
+  .productPageBuyButtons{
+    position: fixed;
+    bottom:0;
+  }
 }

@@ -7,6 +7,7 @@ import {UseDataBase} from "../../utils/UseDataBase.js";
 import ProductPageLoading from './ProductPageLoading.js';
 import ErrorPage from '../ErrorPage/ErrorPage.js';
 import buttonLoadingImg from '../../buttonLoading.svg';
+import SlideShow from '../../components/SlideShow/SlideShow.js'
 
 const ProductPage = props => {
   const [products,setProducts]=useState([]);
@@ -86,6 +87,7 @@ const ProductPage = props => {
     error?<ErrorPage/>:loading?<ProductPageLoading/>:
     <div className="productPage">
       <div className="productPageMain">
+      {window.innerWidth>500?
         <div className="productPageImageMain">
           <div className="productPageImageThumbnail">
             {imageTray}
@@ -99,7 +101,12 @@ const ProductPage = props => {
               <button onClick={buyNowHandler} className="productbuyBtn">{BuyButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><div></div> &nbsp;BUY NOW</>}</button>
             </div>
           </div>
-        </div>
+        </div>:<><SlideShow images={x}/>
+        <div className="productPageBuyButtons">
+              <button onClick={addToCartHandler} className="productAddToCartBtn">{cartButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><img alt="" className='cartImg' src={cartIcon}/> ADD TO CART</>}</button>
+              <button onClick={buyNowHandler} className="productbuyBtn">{BuyButtonLoading?<img src={buttonLoadingImg} alt=''/>:<><div></div> &nbsp;BUY NOW</>}</button>
+            </div>
+        </>}
         <div className="productPageAbout">
           <div className="productPageAboutName"><span>{products[0]&&products[0].product_name}</span></div>
           <div className="productRating">{products[0]&&products[0].product_rating} ★</div>

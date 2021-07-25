@@ -136,3 +136,15 @@
     font-weight: 500;
     color: #388e3c;
   }
+  @media only screen and (max-width: 500px) {
+    .cartItemName {
+        width:80%;
+    }
+    .cartItemTrayLowerRight>button {
+        font-size:12px;
+    }
+    .cartItemTrayUpperLeft>img{
+        max-width: 70%;
+        max-height: 70%
+    }
+  }

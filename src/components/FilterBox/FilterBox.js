@@ -93,9 +93,11 @@ const FilterBox = props =>{
 
   return(
         <div className="filterBox">
+          <div className="filterSortBoxItems">
           <div className="filterBoxName">
             <span>Filters</span>
             {query.has('minPrice')||query.has('maxPrice')||query.has('isAssured')||query.has('filterRating')||query.has('filterBrand')?<p onClick={()=>{history.push('/search?q='+query.get('q').toString());props.setReload(!props.reload);}}>Clear All</p>:""}
+            {window.innerWidth<=500 &&<a onClick={()=>props.setFilterBox(!props.filterBox)} className="filterBoxCloseMobile" >&times;</a>}
           </div>
           <div className ="filterBoxPrice">
             <span className ="filterBoxSpan"><span>Price</span></span>
@@ -119,8 +121,12 @@ const FilterBox = props =>{
           <div className="filterBoxBrandName"><span>Select Brands</span></div>
           <div className="filterBoxBrand">
             {tray}
-          </div>
         </div>
+        </div>
+        {window.innerWidth<=500&&<div onClick={()=>props.setFilterBox(!props.filterBox)} className="filterBottomClose">
+          </div>}
+        </div>
+
   );
 }
 

@@ -55,3 +55,8 @@
   font-weight: 500 !important;
   font-size: 18px !important;
 }
+@media only screen and (max-width: 500px) {
+  .cartBill{
+    width : 100%;
+  }
+}

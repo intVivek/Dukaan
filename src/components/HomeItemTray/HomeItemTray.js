@@ -14,16 +14,18 @@ const HomeItemTray = props=>{
       <div className='CardItemBoxContainer'>
         <div className='CardItemBoxImage'><img className='CardItemBoxImageContainer' alt='img' src={'https://dukaan--app.herokuapp.com/image?url='+img}/></div>
         <div className='CardItemBoxName'>{addThreeDots(props.product.product_name,70)}</div>
-        <div className='CardItemBoxRating'>
-         <div className ="CardRating">{props.product.product_rating}★</div>
+        <div className='CardItemBoxDesc'>
+        {window.innerWidth>500 && <div className='CardItemBoxRating'>
+        <div className ="CardRating">{props.product.product_rating}★</div>
          {props.product.assured==='true'?<img className="assuredIMG" src ={icon} alt='assured'></img>:""}
-        </div>
+        </div>}
         <div className='CardItemBoxPrice'>
           <div className='cardItemPrice'>
             <div className='cardItemDiscountedPrice'>₹{dp && dp.toLocaleString()}</div>
             <div className='cardItemActualPrice'>₹{rp && rp.toLocaleString()}</div>
             <div className='cardItemDiscount'>{discount && discount} %OFF</div>
           </div>
+        </div>
         </div>
       </div>
     </div>

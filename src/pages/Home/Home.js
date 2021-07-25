@@ -32,7 +32,7 @@ export default function Home(props) {
   return (
     error?<ErrorPage/>:isLoading&&pageNum===1?<div className="homeLoading"><LottiePlayer className='loader' animationData={LottieLoading} /><span>Loading ...</span></div>:
       <div  className="homePageMain">
-      <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/>
+      {/* <Category reload={props.reload} setLoading={props.setLoading} setReload={props.setReload}/> */}
       <div className="homePage">
           {tray}
         <div ref={lastElementRef}></div>

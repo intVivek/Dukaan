@@ -1,82 +1,26 @@
 import './LoginBtn.css';
 import arrow from './arrow.svg';
-import { useHistory} from "react-router-dom";
-import {useState} from 'react';
-import {UseDataBase} from "../../utils/UseDataBase.js";
-import Noty from 'noty';  
-import { useEffect } from 'react';
-import { useParams } from "react-router-dom";
 
 const LoginBtn = props =>{
-  const [menu,setMenu]=useState(false);
-  const [error,setError]=useState(false);
-  const [buttonLoading,setButtonLoading]=useState(false);
-  const page = useParams().page;
-
-  let history = useHistory();
-  const clickHandler =()=>{
-    props.setLogin(!props.login);
-  }
-const logOutHandler=()=>{
-
-  setButtonLoading(true);
-  var data = {}
-  UseDataBase(data,'/logout',(dataSet)=>{
-    if(dataSet?.status===0){
-      props.setAuth(false);
-      setMenu(false);
-      history.push("/home");
-      notification(dataSet?.message,'success');
-    }
-    else{
-      notification(dataSet?.message,'error');
-    }
-    setButtonLoading(false);
-  },setButtonLoading,setError);
-}
-const openOrderHandler=()=>{
-  if(page!=='orders'){
-    setMenu(!menu);
-    history.push("/orders");
-  }
-}
-useEffect(()=>{
-  if(error){
-    notification('Some error Occured','error');
-    setButtonLoading(false);
-  }
-},[error]);
-
-const notification = (message,type) =>{
-  new Noty({
-          type: type,
-          theme: 'nest',
-          timeout: 1500,
-          text: message
-  }).show();
-  }
-  useEffect(() => {
-    if (buttonLoading) document.querySelector('.App').style.overflow='hidden';
-    else document.querySelector('.App').style.overflow='auto';
-  }, [buttonLoading]);
 
     if(props.auth && props.userData){
       return (
-        buttonLoading?<div className ='loginBtnLoading'><span className='loader'/></div>:
-        <div onMouseEnter={() => setMenu(!menu)} onMouseLeave={() => setMenu(!menu)} className="dropdown">
+        props.buttonLoading?<div className ='loginBtnLoading'><span className='loader'/></div>:
+        <div onMouseEnter={() => props.setMenu(!props.menu)} onMouseLeave={() => props.setMenu(!props.menu)} className="dropdown">
           <button  className="dropbtn">{props?.userData?.name}<img alt='arrow' src={arrow}/></button>
-          {menu?
+          {props.menu?
           <div className="dropdown-content">
-            <button >Profile</button>
-            <button className='enabled' onClick={openOrderHandler} >orders</button>
+            <button onClick={props.openHomeHandler}>Home</button>
+            <button className='enabled' onClick={props.openOrderHandler} >orders</button>
+            <button onClick={props.openCartHandler}>Cart</button>
             <button >Wishlist</button>
-            <button className='enabled' onClick={logOutHandler}>Log Out</button>
+            <button className='enabled' onClick={props.logOutHandler}>Log Out</button>
           </div>:""}
         </div>
       );
     }
     else{
-      return <button className='loginBtn' onClick={clickHandler}>
+      return <button className='loginBtn' onClick={props.clickHandler}>
         Login
         </button>
     }

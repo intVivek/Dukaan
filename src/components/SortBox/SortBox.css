@@ -1,0 +1,66 @@
+.productSortBottom{
+  width : 100%;
+  height : 30px;
+  display: flex;
+  align-items: center;
+  margin-left : 10px;
+}
+.productSortBottom>span{
+  font-weight: 500;
+  font-size: 16px;
+  margin-right : 10px;
+}
+.productSortBottom>div{
+  display: flex;
+  align-items: center;
+  justify-content : center;
+}
+.productSortBottom>button{
+  margin : auto 10px;
+  cursor: pointer;
+  height : 100%;
+  display: flex;
+  align-items: center;
+  justify-content : center;
+  background-color : #fff;
+  border : none;
+  font-size: 14px;
+  padding : 0;
+}
+.productSortBottom>button:hover{
+  border-bottom: 2px solid #585858;
+  color: #333333;
+}
+.productSortBottom>button.active{
+  cursor: default;
+  border-bottom: 2px solid #2874f0;
+  font-weight: 500;
+  color: #2874f0;
+}
+@media only screen and (max-width: 500px) {
+  .productSortBottom {
+    width: 100%;
+    height:auto;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgb(255, 255, 255);
+  }
+  .productSortBottom>span {
+    width:100%;
+    margin: 5px 0px 5px 15px;
+  }
+  .productSortBottom>button {
+    margin-left: 15px;
+    width:100%;
+    height:30px;
+    margin: 5px 0px 5px 15px;
+    justify-content:flex-start;
+    border:none;
+  }
+  .productSortBottom>button.active {
+    border-bottom: none;
+  }
+  .productSortBottom>button.active {
+    border:none;
+  }
+}

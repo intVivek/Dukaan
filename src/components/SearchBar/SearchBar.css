@@ -36,3 +36,9 @@
   max-height: 25px;
 }
 
+@media only screen and (max-width: 500px) {
+  .search {
+    width:95%;
+    margin:5px;
+  }
+}

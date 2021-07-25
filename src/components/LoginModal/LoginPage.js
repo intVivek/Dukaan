@@ -113,7 +113,7 @@ const LoginPage = props =>{
 }
 
   return(
-    
+    window.innerWidth>500?
     <div className="loginFull">
       <div className="loginWindow">
         <div className="loginPadding"></div>
@@ -132,7 +132,19 @@ const LoginPage = props =>{
         </div>
         <div className="loginPadding"><CloseBtn  login={props.login} setLogin={props.setLogin}/></div>
       </div>
-    </div>
+    </div>:
+            <div className='loginInput'>
+              <a onClick={()=>props.setLogin(!props.login)} className="loginCloseMobile" >&times;</a>
+              {!reg?<div id = 'loginInputSection1' className="loginInputSection"></div>:""}
+              <div id = 'loginInputSection2' className="loginInputSection">{!reg?<TextField key={1} setValue={setEmail} placeHolder='Enter Email'/>:<TextField setValue={setName} placeHolder='User Name'/>}</div>
+              <div id = 'loginInputSection3' className="loginInputSection">{!reg?<TextField key={2} setValue={setPassword} placeHolder='Enter Password'/>:<TextField key={1} setValue={setEmail} placeHolder='Enter Email'/>}</div>
+              <div id = 'loginInputSection4' className="loginInputSection">{!reg?<div className='PrivacyPolicy'>By continuing, you agree to Dukaans's Terms of Use and Privacy Policy.</div>:<TextField setValue={setNumber} placeHolder='Enter Mobile Number'/>}</div>
+              <div id = 'loginInputSection5' className="loginInputSection">{!reg?<button className='loginModalLoginBtn' type="submit" onClick={authenticate}>{buttonLoading?<img src={buttonLoadingImg} alt='buttonLoadingImg'/>:'Login'}</button>:<TextField key={2} setValue={setPassword} placeHolder='Enter Password'/>}</div>
+              <div id = 'loginInputSection6' className="loginInputSection">{!reg?"":<TextField setValue={setCpass} placeHolder='Confirm Password'/>}</div>
+              <div id = 'loginInputSection7' className="loginInputSection">{!reg?"":<div className='PrivacyPolicy'>By continuing, you agree to Dukaan's Terms of Use and Privacy Policy.</div>}</div>
+              <div id = 'loginInputSection8' className="loginInputSection">{!reg?"":<button className='loginModalLoginBtn' type="submit" onClick={register}>{buttonLoading?<img src={buttonLoadingImg} alt='buttonLoadingImg'/>:'Register'}</button>}</div>
+              <div id = 'loginInputSection9' className="loginInputSection">{!reg?<button onClick = {()=>setReg(!reg)}>New to Dukaan? Create an account</button>:<button onClick = {()=>setReg(!reg)}>Existing User? Log In</button>}</div>
+            </div>
   );
 }
 
