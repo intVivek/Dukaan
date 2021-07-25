@@ -167,4 +167,8 @@
   .filterBoxName>p {
     margin:2px 0 0 15px;
   }
+  .filterBoxBrandbottom{
+    width:100%;
+    height:5px;
+  }
 }

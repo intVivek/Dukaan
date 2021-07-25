@@ -122,6 +122,7 @@ const FilterBox = props =>{
           <div className="filterBoxBrand">
             {tray}
         </div>
+        <div className='filterBoxBrandbottom'></div>
         </div>
         {window.innerWidth<=500&&<div onClick={()=>props.setFilterBox(!props.filterBox)} className="filterBottomClose">
           </div>}
