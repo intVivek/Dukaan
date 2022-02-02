@@ -21,7 +21,6 @@ const Body = props =>{
   const [error,setError]=useState(false);
   const [sortBox,setSortBox]=useState(false);
   const [filterBox,setFilterBox]=useState(false);
-
   var search  = query.get('q'),
   page        = query.get('page'),
   sort        = query.get('sort'),
@@ -31,6 +30,7 @@ const Body = props =>{
   filterRating= query.get('filterRating'),
   filterBrand = query.getAll('filterBrand');
 
+  var element=0;
   useEffect(()=>{
     const url = '/product';
     var data = {
@@ -103,8 +103,8 @@ const filterBtnHandler=()=>{
           </>}
           {props.loading?<BodyLoading/>:tray?.length===0?zero:tray}
           {!props.loading&&productData?.[1]?.[0].count?
-          <><div className ='bodyPagesChange'></div>
-          <div className='pagination'><Pagination count={Math.ceil(parseInt(productData[1][0].count)/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/>
+          <><div className ='bodyPagesChange'>
+          <div className='pagination'><Pagination count={Math.ceil(parseInt(productData[1][0].count)/24)} page={parseInt(page)} boundaryCount={2} onChange={pageHandler}/></div>
           </div></>:""}
         </div>
       </div>

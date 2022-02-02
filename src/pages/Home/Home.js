@@ -15,6 +15,7 @@ export default function Home(props) {
   const observer = useRef();
   const lastElementRef = useCallback(
     (node) => {
+      console.log("next");
       if (isLoading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
